@@ -94,12 +94,12 @@ $x=\lambda_1 a_1+ \cdots \lambda_m a_m$に関して、$a_m=\mu_1 a_1 + \cdots \m
 そうでない場合、$\lambda_i+k \mu_i$が最小の$k$で0になるようなインデックスを$i$に取ると、$\lambda_m=\lambda_m'+k$として、
 
 \begin{align*}
-  x & =\lambda_1 a_1 + \cdots + \lambda_i a_i + \cdots + \lambda_m a_m                                                       \\
-    & =\lambda_1 a_1 + \cdots + \lambda_i a_i + \cdots +(\lambda_m'+k) a_m                                                   \\
-    & =\lambda_1 a_1 + \cdots + \lambda_i a_i + \cdots + \lambda_m' a_m + k(\mu_1a_1+\cdots+\mu_{m-1}a_{m-1})                \\
-    & =(k\mu_1+\lambda_1) a_1 + \cdots + (k\mu_i+\lambda_i)a_i + \cdots + (k \mu_{m-1}+\lambda_{m-1}) a_{m-1}+\lambda_m' a_m \\
-    & =(k\mu_1+\lambda_1) a_1 + \cdots + 0 + \cdots + (k \mu_{m-1}+\lambda_{m-1}) a_{m-1}+\lambda_m' a_m                     \\
-    & \in C(\{a_j | 1 \leq j \leq m, j\neq i \})
+    x & =\lambda_1 a_1 + \cdots + \lambda_i a_i + \cdots + \lambda_m a_m                                                       \\
+      & =\lambda_1 a_1 + \cdots + \lambda_i a_i + \cdots +(\lambda_m'+k) a_m                                                   \\
+      & =\lambda_1 a_1 + \cdots + \lambda_i a_i + \cdots + \lambda_m' a_m + k(\mu_1a_1+\cdots+\mu_{m-1}a_{m-1})                \\
+      & =(k\mu_1+\lambda_1) a_1 + \cdots + (k\mu_i+\lambda_i)a_i + \cdots + (k \mu_{m-1}+\lambda_{m-1}) a_{m-1}+\lambda_m' a_m \\
+      & =(k\mu_1+\lambda_1) a_1 + \cdots + 0 + \cdots + (k \mu_{m-1}+\lambda_{m-1}) a_{m-1}+\lambda_m' a_m                     \\
+      & \in C(\{a_j | 1 \leq j \leq m, j\neq i \})
 \end{align*}
 
 となり、要素数を減らすことが出来る。
@@ -129,7 +129,7 @@ $C(\mathcal{B})$が閉集合であることを示す。
 \subsubsection*{(3-1)}
 
 \begin{align*}
-  (P) & \Rightarrow \exists \lambda \in \mathbb{R}^m \text{ s.t. } A\lambda =x,\lambda \geq 0
+    (P) & \Rightarrow \exists \lambda \in \mathbb{R}^m \text{ s.t. } A\lambda =x,\lambda \geq 0
 \end{align*}
 
 この時、$c^TA \leq 0 \Rightarrow c^TA\lambda =c^Tx \leq 0$
@@ -149,40 +149,40 @@ $\overline{(P)}$ならば、$x \notin C(\mathcal{A})$であり、分離定理よ
 ファルカスの補題は、弱双対定理からも示せる。
 
 \begin{align*}
-  \min_{x} c^Tx \text{ s.t. } Ax = b, x \geq \bm{0}
+    \min_{x} c^Tx \text{ s.t. } Ax = b, x \geq \bm{0}
 \end{align*}
 
 \begin{align*}
-  \max_{y} b^Ty \text{ s.t. } A^Ty \leq c
+    \max_{y} b^Ty \text{ s.t. } A^Ty \leq c
 \end{align*}
 
 記号を入れ替えて、
 
 \begin{align*}
-              & \min_{\lambda} \bm{0}^T\lambda \text{ s.t. } A\lambda = x, \lambda \geq \bm{0} \\
-  \Rightarrow & \min_{\lambda} 0 \text{ s.t. } A\lambda = x, \lambda \geq \bm{0}
+                & \min_{\lambda} \bm{0}^T\lambda \text{ s.t. } A\lambda = x, \lambda \geq \bm{0} \\
+    \Rightarrow & \min_{\lambda} 0 \text{ s.t. } A\lambda = x, \lambda \geq \bm{0}
 \end{align*}
 
 \begin{align*}
-              & \max_{c} x^Tc \text{ s.t. } A^Tc \leq \bm{0} \\
-  \Rightarrow & \max_{c} c^Tx \text{ s.t. } c^TA \leq \bm{0}
+                & \max_{c} x^Tc \text{ s.t. } A^Tc \leq \bm{0} \\
+    \Rightarrow & \max_{c} c^Tx \text{ s.t. } c^TA \leq \bm{0}
 \end{align*}
 
 となる。
 
 $\overline{(Q)}$ならば、弱双対定理より、$(P)$となる。
 
-\section{参考文献}
+
 \begin{thebibliography}{9}
-  \bibitem{site:1}
-  "コンパクト集合上の連続関数".\url{http://www.misojiro.t.u-tokyo.ac.jp/~murota/lect-kisosuri/contfncompactset070914.pdf}
-  \bibitem{site:2}
-  Wikipedia."分離超平面定理".2022年3月16日.\url{https://ja.wikipedia.org/wiki/%E5%88%86%E9%9B%A2%E8%B6%85%E5%B9%B3%E9%9D%A2%E5%AE%9A%E7%90%86}
-  \bibitem{site:3}
-  WIIS."凸集合どうしのミンコフスキー和（ミンコフスキー差）".2022年2月21日.\url{https://wiis.info/math/convex-analysis/convex-set/sum-of-set/}
-  \bibitem{site:4}
-  "Farkasの補題と線形計画法の双対定理"\url{http://www.misojiro.t.u-tokyo.ac.jp/~murota/lect-surikeikakuhou/farkas031025.pdf}
-  \bibitem{site:5}
-  関口 良行（東京海洋大学）."有限生成錐が閉集合になることについて".\url{https://www2.kaiyodai.ac.jp/~yoshi-s/Notes/FiniteCone.pdf}
+    \bibitem{site:1}
+    "コンパクト集合上の連続関数".\url{http://www.misojiro.t.u-tokyo.ac.jp/~murota/lect-kisosuri/contfncompactset070914.pdf}
+    \bibitem{site:2}
+    Wikipedia."分離超平面定理".2022年3月16日.\url{https://ja.wikipedia.org/wiki/%E5%88%86%E9%9B%A2%E8%B6%85%E5%B9%B3%E9%9D%A2%E5%AE%9A%E7%90%86}
+    \bibitem{site:3}
+    WIIS."凸集合どうしのミンコフスキー和（ミンコフスキー差）".2022年2月21日.\url{https://wiis.info/math/convex-analysis/convex-set/sum-of-set/}
+    \bibitem{site:4}
+    "Farkasの補題と線形計画法の双対定理"\url{http://www.misojiro.t.u-tokyo.ac.jp/~murota/lect-surikeikakuhou/farkas031025.pdf}
+    \bibitem{site:5}
+    関口 良行（東京海洋大学）."有限生成錐が閉集合になることについて".\url{https://www2.kaiyodai.ac.jp/~yoshi-s/Notes/FiniteCone.pdf}
 \end{thebibliography}
 \end{document}
