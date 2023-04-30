@@ -1,0 +1,275 @@
+\documentclass[a4paper, 10pt, dvipdfmx]{jlreq}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{listings, jlisting}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage{url}
+
+\Urlmuskip=0mu plus 10mu
+\allowdisplaybreaks[4]
+\frenchspacing
+\definecolor{OliveGreen}{rgb}{0.0,0.6,0.0}
+\definecolor{Orenge}{rgb}{0.89,0.55,0}
+\definecolor{SkyBlue}{rgb}{0.28, 0.28, 0.95}
+\lstset{
+  language={c++},
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  ndkeywordstyle={\small},
+  frame=single,
+  breaklines=true,
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  lineskip=-0.9ex,
+  keywordstyle={\small\bfseries\color{SkyBlue}},  
+  commentstyle={\color{OliveGreen}}, 
+  stringstyle={\small\ttfamily\color{Orenge}}    
+}
+
+\begin{document}
+
+\title{共通数学 2023年度 大問3}
+\author{hari64boli64 (hari64boli64@gmail.com)}
+\date{\today}
+\maketitle
+
+\section{解答}
+
+\subsection*{(1)}
+
+$M=1$の場合、四角い石が出た時点で操作は停止される。
+
+よって、状態$C_0$から$n$個石を並べたときに初めて停止条件を満たす確率$a_{0n}$は、
+
+\begin{align*}
+    a_{0n} =
+    \begin{cases}
+        0            & (n = 0   ) \\
+        (1-q)^{n-1}q & (n \geq 1)
+    \end{cases}
+\end{align*}
+
+となる。
+
+よって、
+
+\begin{align*}
+    \mathbb{E}[L] & = \sum_{n=0}^{\infty} na_{0n}                   \\
+                  & = \sum_{n=1}^{\infty} n(1-q)^{n-1}q             \\
+                  & = q\dv{t}\qty(\sum_{n=1}^{\infty}{t^n})_{t=1-q} \\
+                  & = q\dv{t}\qty(\frac{1}{1-t})_{t=1-q}            \\
+                  & = q\frac{1}{\qty(1-(1-q))^2}                    \\
+                  & = \frac{1}{q}                                   \\
+\end{align*}
+
+
+\begin{align*}
+    \mathbb{V}[L] & = \mathbb{E}[L^2] - \mathbb{E}[L]^2                   \\
+                  & = \sum_{n=0}^{\infty} n^2a_{0n} - \frac{1}{q^2}       \\
+                  & = \sum_{n=1}^{\infty} n^2(1-q)^{n-1}q - \frac{1}{q^2} \\
+                  & = \frac{2-q}{q^2}-\frac{1}{q^2}                       \\
+                  & = \frac{1-q}{q^2}                                     \\
+\end{align*}
+
+となる。
+
+(参考:これは幾何分布と呼ばれる分布である\cite{site:geo})
+
+\subsection*{(2)}
+
+まず、状態$C_k(k>M)$は定義されない事に注意する。(あるいは、定義されても$A_k(t)=0$)
+
+また、状態$C_k(k=M)$の場合、既に操作は停止しているので、$a_{k0}=1$より、$A_k(t)=1$となる。
+
+$k<M$の場合を考える。この時、状態遷移図は図\ref{img:automaton}のようになる。
+
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[height=80mm]{automaton.png}
+        \caption{automaton}
+        \label{img:automaton}
+    \end{center}
+\end{figure}
+
+この図に示した通り、
+
+\begin{quote}
+    \begin{itemize}
+        \item 確率$q$で四角い石が出る時、1個石を並べた上で、状態$C_{k+1}$に遷移する。
+        \item 確率$1-q$で丸石が出る時、1個石を並べた上で、状態$C_0$に遷移する。
+    \end{itemize}
+\end{quote}
+
+という関係性があるので、
+
+\begin{align*}
+    A_k(t)=qtA_{k+1}(t)+(1-q)tA_0(t) \quad (0 \leq k < M)
+\end{align*}
+
+となる。あるいは、同じことだが、
+
+\begin{align*}
+    A_{M-i}(t)=qtA_{M-i+1}(t)+(1-q)tA_0(t) \quad (0 < i \leq M)
+\end{align*}
+
+となる。
+
+(なお、答えの書き方は色々あると思うが、恐らく上式のいずれかだけで十分だと思う。)
+
+\subsection*{(3)}
+
+(2)の結果より、
+
+\begin{align*}
+    A_{M-1}(t) & =qtA_{M}(t)+(1-q)tA_0(t)                                  \\
+               & =qt+(1-q)tA_0(t)                                          \\
+    A_{M-2}(t) & =qtA_{M-1}(t)+(1-q)tA_0(t)                                \\
+               & =qt\qty(qt+(1-q)tA_0(t))+(1-q)tA_0(t)                     \\
+               & =q^2t^2+(1-q)qt^2A_0(t)+(1-q)tA_0(t)                      \\
+               & =q^2t^2+\qty((1-q)qt^2+(1-q)t)A_0(t)                      \\
+    A_{M-3}(t) & =qtA_{M-2}(t)+(1-q)tA_0(t)                                \\
+               & =qt\qty(q^2t^2+\qty((1-q)qt^2+(1-q)t)A_0(t))+(1-q)tA_0(t) \\
+               & =q^3t^3+\qty((1-q)q^2t^3+(1-q)qt^2+(1-q)t)A_0(t)          \\
+\end{align*}
+
+
+となっていく。
+
+つまり、
+
+\begin{align*}
+    A_{M-i}(t) & =q^it^i+\qty(\sum_{j=0}^{i-1}(1-q)q^{j}t^{j+1})A_0(t)                \\
+               & =(qt)^i+(1-q)t\qty(\sum_{j=0}^{i-1}(qt)^{j})A_0(t)                   \\
+               & =(qt)^i+(1-q)t\qty(\frac{1-(qt)^i}{1-qt})A_0(t) \quad (0 < i \leq M)
+\end{align*}
+
+となる。
+
+特に、$i=M$の場合を考えると、
+
+\begin{align*}
+    A_0(t)  = (qt)^M+(1-q)t\qty(\frac{1-(qt)^M}{1-qt})A_0(t) \\
+\end{align*}
+
+整理して、
+
+\begin{align*}
+    A_0(t)     & =\frac{(qt)^M}{1-(1-q)t\qty(\frac{1-(qt)^M}{1-qt})}                                                                      \\
+    A_{M-i}(t) & =(qt)^i+(1-q)t\qty(\frac{1-(qt)^i}{1-qt})\frac{(qt)^M}{1-(1-q)t\qty(\frac{1-(qt)^M}{1-qt})} \quad (0 < i \leq M)         \\
+    A_{k}(t)   & =(qt)^{M-k}+(1-q)t\qty(\frac{1-(qt)^{M-k}}{1-qt})\frac{(qt)^M}{1-(1-q)t\qty(\frac{1-(qt)^M}{1-qt})} \quad (0 \leq k < M) \\
+\end{align*}
+
+となる。
+
+(補足: 答えは合っている気がするけれど、整理しきれていない可能性は高い。式が汚すぎる。)
+
+\subsection*{(4)}
+
+(3)の結果より、
+
+\begin{align*}
+    A_0(t) & =\frac{(qt)^M}{1-(1-q)t\qty(\frac{1-(qt)^M}{1-qt})} \\
+           & =\frac{(qt)^M(1-qt)}{(1-qt)-(1-q)t(1-(qt)^M)}       \\
+\end{align*}
+
+
+(1)と同様の考え方から、答えは$\qty(\dv{t}A_0(t))_{t=1}$である。
+
+よって、これを微分して、代入整理すると、
+
+\begin{align*}
+    \frac{1-q^M}{(1-q)q^M}
+\end{align*}
+
+となる。
+
+(なお、$M=1$を代入すると、これは$\frac{1}{q}$となり、(1)の結果に一致する)
+
+\section{おまけ}
+
+コードによって、正当性を検証する。
+
+\lstinputlisting[caption=実験コード,label=code:実験コード,language=Python]{test.py}
+
+以下に、実験結果を示す。
+
+\begin{lstlisting}[caption=実験結果, label=code:実験結果]
+M=1, q=0.1
+avg=10.0076
+(1 - q**M) / ((1 - q) * (q**M))=9.999999999999998
+==========
+M=1, q=0.2
+avg=4.9994
+(1 - q**M) / ((1 - q) * (q**M))=4.999999999999999
+==========
+M=1, q=0.3
+avg=3.3353
+(1 - q**M) / ((1 - q) * (q**M))=3.333333333333333
+==========
+M=1, q=0.4
+avg=2.4801
+(1 - q**M) / ((1 - q) * (q**M))=2.5
+==========
+M=1, q=0.5
+avg=2.0025
+(1 - q**M) / ((1 - q) * (q**M))=2.0
+==========
+M=2, q=0.1
+avg=110.8138
+(1 - q**M) / ((1 - q) * (q**M))=109.99999999999997
+==========
+M=2, q=0.2
+avg=30.3796
+(1 - q**M) / ((1 - q) * (q**M))=29.999999999999993
+==========
+M=2, q=0.3
+avg=14.6192
+(1 - q**M) / ((1 - q) * (q**M))=14.444444444444445
+==========
+M=2, q=0.4
+avg=8.626
+(1 - q**M) / ((1 - q) * (q**M))=8.749999999999998
+==========
+M=2, q=0.5
+avg=5.9403
+(1 - q**M) / ((1 - q) * (q**M))=6.0
+==========
+M=3, q=0.1
+avg=1106.5573
+(1 - q**M) / ((1 - q) * (q**M))=1109.9999999999998
+==========
+M=3, q=0.2
+avg=153.216
+(1 - q**M) / ((1 - q) * (q**M))=154.99999999999994
+==========
+M=3, q=0.3
+avg=50.901
+(1 - q**M) / ((1 - q) * (q**M))=51.48148148148149
+==========
+M=3, q=0.4
+avg=24.4842
+(1 - q**M) / ((1 - q) * (q**M))=24.374999999999993
+==========
+M=3, q=0.5
+avg=13.7934
+(1 - q**M) / ((1 - q) * (q**M))=14.0
+\end{lstlisting}
+
+確かに、大まかに一致しているため、正しいと考えられる。
+
+\begin{thebibliography}{9}
+    \bibitem{site:geo}
+    数学の景色.“幾何分布の期待値(平均)・分散・標準偏差とその導出証明”.2021年9月13日.\url{https://mathlandscape.com/geometric-distrib-ev/}
+\end{thebibliography}
+
+\end{document}
+
