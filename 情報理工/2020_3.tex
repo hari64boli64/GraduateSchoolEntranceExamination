@@ -1,0 +1,141 @@
+\documentclass[a4paper, 10pt, dvipdfmx]{jlreq}
+
+\usepackage{ascmac}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{listings, jlisting}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage{url}
+
+\Urlmuskip=0mu plus 10mu
+\allowdisplaybreaks[4]
+\frenchspacing
+\definecolor{OliveGreen}{rgb}{0.0,0.6,0.0}
+\definecolor{Orenge}{rgb}{0.89,0.55,0}
+\definecolor{SkyBlue}{rgb}{0.28, 0.28, 0.95}
+\lstset{
+  language={c++},
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  ndkeywordstyle={\small},
+  frame=single,
+  breaklines=true,
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  lineskip=-0.9ex,
+  keywordstyle={\small\bfseries\color{SkyBlue}},  
+  commentstyle={\color{OliveGreen}}, 
+  stringstyle={\small\ttfamily\color{Orenge}}    
+}
+
+\begin{document}
+
+\title{2020年度 大問3}
+\author{hari64boli64 (hari64boli64@gmail.com)}
+\date{\today}
+\maketitle
+
+
+\section{問題}
+
+\begin{align*}
+  L & =K[x_1,x_2,\cdots ,x_n, x_1^{-1},x_2^{-1},\cdots ,x_n^{-1}] \\
+  R & =K[x_1,x_2,\cdots ,x_n, y_1,y_2,\cdots ,y_n]
+\end{align*}
+
+\section{解答}
+
+\subsection*{(1)}
+
+以下の二つを言えばよい。
+
+\begin{quote}
+  \begin{itemize}
+    \item  $\varphi^{-1}(J)$は加法について部分群である
+
+          $J$も加法について$L$の部分群であるので明らか。
+
+    \item $r \in \varphi^{-1}(J),x \in R \Rightarrow rx \in \varphi^{-1}(J)$
+
+          $\varphi(rx)=\varphi(r)\varphi(x)\in J \quad (\because \varphi(r) \in J , \varphi(x) \in L)$より従う。
+  \end{itemize}
+\end{quote}
+
+
+\subsection*{(2)}
+
+自明
+
+\subsection*{(3)}
+
+$I \subset \mathrm{Ker}\varphi$は代入すれば明らか。
+
+$\mathrm{Ker}\varphi \subset I$は、(2)より$r\neq 0$ならば$\varphi(p) \neq 0$が言えればよい。
+
+説明が難しいが、$x_i$と$x_j,y_j$が無関係だということを言えばok? (自信なし)
+
+後半は準同型定理より、
+
+\begin{align*}
+              & R/\mathrm{Ker}{\varphi} \cong \mathrm{Im}{\varphi} \\
+  \Rightarrow & R/I \cong L
+\end{align*}
+
+\section{知識}
+
+斜体ならば可換性を課さないが、体ならば可換性がある。
+
+体の定義は以下の通り。
+
+\begin{itembox}[l]{ 定義（体）}
+  空でない集合$K$が体(field)であるとは，
+
+  1. $K$が単位元を持つ可換環
+
+  2. $K$の0でない任意の元が乗法逆元を持つ,すなわち,$a \neq 0$に対し，$aa^{-1}=1$となるものが存在する。言い換えると$K^{\times}=K\setminus\{0\}$である
+
+  の2つが成り立つことをいう。ただし,$K^{\times}$とは$K$の乗法群を指す。
+\end{itembox}
+
+この時、右イデアルと左イデアルは同じになる。
+
+イデアルの定義は以下の通り。
+
+\begin{itembox}[l]{ 定義（イデアル）}
+  $R$を環とし，$I \subset R$とする。$I$について，
+
+  1. $I$は加法について部分群である
+
+  2. $r \in R, x \in I \Rightarrow rx \in I$
+
+  3. $r \in R, x \in I \Rightarrow xr \in I$
+
+  ...(中略)...,1,2,3が成り立つとき,両側イデアル (two-sided ideal)という。
+\end{itembox}
+
+$S (\subset R)$から生成された有限生成イデアルの一般形は以下の通り。
+
+\begin{align*}
+  (S)=\{r_1s_1+\cdots r_ns_n | r_k \in R, s_k \in S, n \geq 1 \}
+\end{align*}
+
+群の準同型定理の主張は以下の通り。
+
+群準同型$f:G_1 \to G_2$に対して、写像$F:G_1/\mathrm{Ker}f \to \mathrm{Im}f$は群準同型であり、特に、$G_1/\mathrm{Ker}f \cong \mathrm{Im}f$である。
+
+\section{参考文献}
+\begin{thebibliography}{9}
+  \bibitem{site:1}
+  数学の景色.“体の定義と具体例4つ”.2022年6月13日.\url{https://mathlandscape.com/field/}
+  \bibitem{site:2}
+  数学の景色.“イデアル(環論)とは～定義・具体例・基本的性質の証明～”.2022年6月19日.\url{https://mathlandscape.com/ideal/}
+\end{thebibliography}
+\end{document}
