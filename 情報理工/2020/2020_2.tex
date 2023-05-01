@@ -117,7 +117,34 @@ $\mu$に関連する部分だけ取り出すと、
     M(\mu) & = (1-e^{-\frac{a}{\mu}})^m(e^{-\frac{a}{\mu}})^{N-m}  \frac{1}{\mu^{N-m}} e^{-\frac{Ny-a}{\mu}}
 \end{align*}
 
-以下不明。
+となるが、これを微分するのは大変な困難を伴うように思われる。
+
+なので、別の方針を考える。
+
+\begin{align*}
+    h(m,y;\mu) & =\dv{y}\qty(\int_a^y{h(m,y';\mu)}dy')  \\
+               & =\dv{y}\qty(P(M=m,\overline{Y}\leq y)) \\
+               & =P(M=m,\overline{Y}=y)                 \\
+\end{align*}
+
+ただし、最後の変形で、累積分布関数の微分が確率密度関数になることを用いた。
+
+細かい議論は(2)などと同様になるので省くが、無記憶性を用いた議論や適切な変形を経ると、結局のところ、指数分布の確率密度関数$f(x;\mu)$について、ある値$Y$を取る確率が最大になるような$\mu$が、ただ一つ存在することを示す問題に帰着されると思われる。
+
+これは、(2)の議論とほぼ同様である。
+
+以下では、おまけ程度に、上で示した問題の解を与える。
+
+\begin{align*}
+    \pdv{\mu}f(Y;\mu) & =-\frac{1}{\mu^2}e^{-\frac{Y}{\mu}}+\frac{1}{\mu}\frac{Y}{\mu^2}e^{-\frac{Y}{\mu}} \\
+                      & =\frac{-mu+Y}{\mu^3}e^{-\frac{Y}{\mu}}
+\end{align*}
+
+よって、$\pdv{\mu}f(Y;\mu)=0$となる$\mu$は、$Y=\mu$の時、これのみである。
+
+以上で、大まかには題意が示された。
+
+より詳細な議論を、本来は行うべきであろう。
 
 \section{知識}
 
@@ -126,8 +153,6 @@ $\mu$に関連する部分だけ取り出すと、
 \begin{align*}
     f_{Y(=X_1+X_2)}(y)=\int_0^{y}{f_{X_1}(x)f_{X_2}(y-x)dx}
 \end{align*}
-
-なので、(3)で期待値も同じ指数分布に従うと考えることは誤り。
 
 同じ指数分布の重ね合わせがガンマ分布になることを示す。
 
@@ -157,9 +182,23 @@ $\mu$に関連する部分だけ取り出すと、
                  & =P(X>t)                                                                                                          \\
 \end{align*}
 
-\begin{itembox}[l]{\href{指数分布の無記憶性とその証明}{https://mathlandscape.com/exp-distrib-memoryless/}}
+\begin{itembox}[l]{\href{https://mathlandscape.com/exp-distrib-memoryless/}{指数分布の無記憶性とその証明}}
     指数分布とは，「コールセンターに次に電話がかかってくるまでにかかる時間」や「電化製品が次に壊れるまでの時間」などに用いられます。「昨日コールセンターに電話がかかってきたから，今日はかかってこないだろう」とか「昨日電化製品が壊れなかったから，今日は壊れないだろう」とか，そういうことはないわけですから，この事象には，無記憶性があるといえるわけですね。
 \end{itembox}
+
+そして、最後の(4)などは、図\ref{img:param}が念頭にあると、より分かりやすいと思われる。
+
+とある$x$でこのグラフを切った時に、最大の値を取るような$\lambda$は、ただ一つだけというのが、この問題の視覚的な理解であると思われる。
+
+\newpage
+
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[height=80mm]{exp-distrib-many-1024x583.png}
+        \caption{パラメータ毎の指数分布 \cite{site:1}}
+        \label{img:param}
+    \end{center}
+\end{figure}
 
 
 \begin{thebibliography}{9}
@@ -168,4 +207,5 @@ $\mu$に関連する部分だけ取り出すと、
     \bibitem{site:2}
     数学の景色."指数分布の無記憶性とその証明".2021年9月23日.\url{https://mathlandscape.com/exp-distrib-memoryless/}
 \end{thebibliography}
+
 \end{document}
