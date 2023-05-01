@@ -42,14 +42,90 @@
 \date{\today}
 \maketitle
 
-
 \section{問題}
+
+\begin{align*}
+  \pdv{t}x(n,t) & =x(n-1,t)+x(n+1,t)-2x(n,t) \\
+  x(n+N,t)      & =x(n,t)                    \\
+  e(m,n)        & =\exp(i\frac{2\pi mn}{N})
+\end{align*}
 
 \section{解答}
 
+\subsection*{(1)}
+
+\begin{align*}
+                  & \pdv{t}x(n,t)=x(n-1,t)+x(n+1,t)-2x(n,t)                                     \\
+  \Leftrightarrow & e(m,n)\dv{t}f_m(t)=e(m,n-1)f_m(t)+e(m,n+1)f_m(t)-2e(m,n)f_m(t)              \\
+  \Leftrightarrow & \dv{t}f_m(t)=\qty(\exp(-i\frac{2\pi m}{N})+\exp(i\frac{2\pi m}{N})-2)f_m(t) \\
+  \Leftrightarrow & f_m(t)=c_me^{\qty(\exp(-i\frac{2\pi m}{N})+\exp(i\frac{2\pi m}{N})-2)t}     \\
+\end{align*}
+
+そして、これは$e(m,n+N)=e(m,n)$より、条件(**)を満たす。
+
+\subsection*{(2)}
+
+(1)の形で書けるとまず仮定して、与えられた初期条件を適用すると、$c_m=\frac{g_n}{e(m,n)}$となる。
+
+しかし、これでは$c_m$が$n$に依存してしまうので、条件に反してしまう。
+なので、$c_m$を$n$に依存しないように定めたい。
+
+ここで、$g_n=\sum_{m=0}^{N-1}e(m,n)c'_m$という形で書けることを利用する。
+
+ただし、$c'_m=\frac{1}{N}\sum_{n'=0}^{N-1}e(-m,n')g_{n'}$である。これは離散フーリエ変換に相当する。
+
+なお、このような形で書けることは、以下で確認することが出来る。
+
+\begin{align*}
+    & \sum_{m=0}^{N-1}e(m,n)c'_m                                       \\
+  = & \frac{1}{N}\sum_{m=0}^{N-1}e(m,n)\sum_{n'=0}^{N-1}e(-m,n')g_{n'} \\
+  = & \frac{1}{N}\sum_{n'=0}^{N-1}\sum_{m=0}^{N-1}e(m,n)e(-m,n')g_{n'} \\
+  = & \frac{1}{N}\sum_{n'=0}^{N-1}\sum_{m=0}^{N-1}e(m,n-n')g_{n'}      \\
+  = & \frac{1}{N}\sum_{n'=0}^{N-1}N\delta_{n,n'}g_{n'}                 \\
+  = & \frac{1}{N}Ng_n                                                  \\
+  = & g_n                                                              \\
+\end{align*}
+
+この事を利用すると、
+
+\begin{align*}
+  x(n,t)=\sum_{m=0}^{N-1}e(m,n)f_m(t) \quad (c_m=c'_m)
+\end{align*}
+
+とすれば、
+
+\begin{align*}
+  x(n,0)=\sum_{m=0}^{N-1}e(m,n)c_m=g_n
+\end{align*}
+
+となり、特に、(1)より、これは条件(*),(**)を共に満たす。
+
+よって、
+
+\begin{align*}
+  x(n,t) & =\sum_{m=0}^{N-1}e(m,n)f_m(t)                                                                                                        \\
+         & =\sum_{m=0}^{N-1}e(m,n)\qty(\frac{1}{N}\sum_{n'=0}^{N-1}e(-m,n')g_{n'})e^{\qty(\exp(-i\frac{2\pi m}{N})+\exp(i\frac{2\pi m}{N})-2)t} \\
+\end{align*}
+
+が解となる。
+
+\subsection*{(3)}
+
+\begin{align*}
+  \lim_{t\to\infty}x(n,t) & =\lim_{t\to\infty}\sum_{m=0}^{N-1}e(m,n)c_me^{\qty(\exp(-i\frac{2\pi m}{N})+\exp(i\frac{2\pi m}{N})-2)t} \\
+                          & =c_0                                                                                                     \\
+                          & =\frac{1}{N}\sum_{n=0}^{N-1}e(0,n)g_n                                                                    \\
+                          & =\frac{1}{N}\sum_{n=0}^{N-1}g_n                                                                          \\
+\end{align*}
+
 \section{知識}
 
-\begin{thebibliography}{9}
+離散フーリエ変換
 
+\begin{thebibliography}{9}
+  \bibitem{site:1}
+  金沢大学."離散フーリエ変換の計算法".\url{http://leo.ec.t.kanazawa-u.ac.jp/~nakayama/edu/file/signal_proc_ch4.pdf}
+  \bibitem{site:2}
+  Wikipedia."離散フーリエ変換".2022年12月28日.\url{https://ja.wikipedia.org/wiki/%E9%9B%A2%E6%95%A3%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E5%A4%89%E6%8F%9B}
 \end{thebibliography}
 \end{document}
