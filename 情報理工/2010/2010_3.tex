@@ -1,0 +1,102 @@
+\documentclass[a4paper, 10pt, dvipdfmx]{jlreq}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{listings, jlisting}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage{url}
+
+\Urlmuskip=0mu plus 10mu
+\allowdisplaybreaks[4]
+\frenchspacing
+\definecolor{OliveGreen}{rgb}{0.0,0.6,0.0}
+\definecolor{Orenge}{rgb}{0.89,0.55,0}
+\definecolor{SkyBlue}{rgb}{0.28, 0.28, 0.95}
+\lstset{
+  language={c++},
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  ndkeywordstyle={\small},
+  frame=single,
+  breaklines=true,
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  lineskip=-0.9ex,
+  keywordstyle={\small\bfseries\color{SkyBlue}},  
+  commentstyle={\color{OliveGreen}}, 
+  stringstyle={\small\ttfamily\color{Orenge}}    
+}
+
+\begin{document}
+
+\title{2010年度 大問3}
+\author{hari64boli64 (hari64boli64@gmail.com)}
+\date{\today}
+\maketitle
+
+\section{問題}
+
+略
+
+\section{解答}
+
+\subsection*{(1)}
+
+$C$の範囲内に移動させる方法が、かならず1通りのみである。
+
+これを厳密に書くのは、測度論などの都合上、かなり難しい気がする。
+
+todo: 追記
+
+\subsection*{(2)}
+
+そうでなければ、体積が1より大きいということに矛盾する。
+
+\subsection*{(3)}
+
+(2)から自明。
+
+\subsection*{(4)}
+
+$v(\frac{1}{2}B)=\frac{1}{2^n}v(B) > 1$より、(3)の結果から、
+
+\begin{align*}
+                  & \exists \bm{x},\bm{y} \in \frac{1}{2}B \text{ s.t. } \bm{x}-\bm{y} \in \mathbb{Z}^n \\
+  \Leftrightarrow & \exists \bm{2x},\bm{2y} \in B \text{ s.t. } \bm{x}-\bm{y} \in \mathbb{Z}^n          \\
+\end{align*}
+
+$B$の凸性と原点対称性から、$\frac{1}{2}\qty(\bm{2x}+(-\bm{2y}))=\bm{x}-\bm{y}$も$B$に含まれる。
+
+特に、$\bm{x} \neq \bm{y}$より、$\bm{x}-\bm{y} \neq \bm{0}$である。
+
+以上より、$\bm{x}-\bm{y}$が題意を満たす。
+
+\subsection*{(5)}
+
+\begin{align*}
+  B & =\left\{\{g_j\}_{1 \leq j\leq 3} \middle| \sum_{i=1}^{3}\left| \sum_{j=1}^{3}r_{ij}g_j \right| < \alpha \right\} \\
+    & =\left\{\{g_j\}_{1 \leq j\leq 3} \middle| ||R\bm{g}||_1 < \alpha \right\}
+\end{align*}
+
+Bが原点対称な有界凸集合であることは明らか。
+
+あとは、$v(B)>2^n=2^3$を示せば、(4)より従う。
+
+todo : 追記
+
+
+\section{知識}
+
+\begin{thebibliography}{9}
+
+\end{thebibliography}
+
+\end{document}
