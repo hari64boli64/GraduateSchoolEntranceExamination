@@ -1,0 +1,86 @@
+\documentclass[a4paper, 10pt, dvipdfmx]{jlreq}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{listings, jlisting}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage{url}
+
+\Urlmuskip=0mu plus 10mu
+\allowdisplaybreaks[4]
+\frenchspacing
+\definecolor{OliveGreen}{rgb}{0.0,0.6,0.0}
+\definecolor{Orenge}{rgb}{0.89,0.55,0}
+\definecolor{SkyBlue}{rgb}{0.28, 0.28, 0.95}
+\lstset{
+  language={c++},
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  ndkeywordstyle={\small},
+  frame=single,
+  breaklines=true,
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  lineskip=-0.9ex,
+  keywordstyle={\small\bfseries\color{SkyBlue}},  
+  commentstyle={\color{OliveGreen}}, 
+  stringstyle={\small\ttfamily\color{Orenge}}    
+}
+
+\begin{document}
+
+\title{2010年度 大問5}
+\author{hari64boli64 (hari64boli64@gmail.com)}
+\date{\today}
+\maketitle
+
+\section{問題}
+
+\begin{align*}
+  \max              & \sum_{i=1}^{n} p_i x_i                      \\
+  \text{subject to} & \sum_{i=1}^{n} s_i x_i \leq S \quad (*)     \\
+                    & x_i \in \{0,1\} \; (i=1,\cdots,n) \quad (*) \\
+\end{align*}
+
+\section{解答}
+
+\href{./5.py}{5.py}を見て下さい。
+
+slowとあるのは、正当性の検証目的であり、実際には不要です。
+
+\lstinputlisting[caption=answer,label=code:answer,language=Python]{5.py}
+
+\begin{lstlisting}[caption=output, label=code:output]
+N=5,S=5,Ps=[2, 3, 2, 1, 3],Ss=[2, 3, 1, 2, 1]
+slowP(N, S, Ps, Ss)=8
+As=
+[0, -inf, -inf, -inf, -inf, -inf]
+[0, -inf, 2, -inf, -inf, -inf]
+[0, -inf, 2, 3, -inf, 5]
+[0, 2, 2, 4, 5, 5]
+[0, 2, 2, 4, 5, 5]
+[0, 3, 5, 5, 7, 8]
+ans= 8
+==========
+N=3,S=3,Ps=[7, 10, 4],Ss=[1, 4, 1]
+slowQ(N, S, Ps, Ss)=21
+ans= 21
+==========
+N=4,S=2,W=8,Ps=[5, 7, 7, 10],Ss=[2, 8, 7, 2],Ws=[6, 2, 6, 10]
+slowR(N, S, W, Ps, Ss, Ws)=5
+ans= 5
+\end{lstlisting}
+
+\section{知識}
+
+特に無し
+
+\end{document}
