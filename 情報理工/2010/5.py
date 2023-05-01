@@ -84,7 +84,7 @@ def slowR(N, S, W, Ps, Ss, Ws):
 def solveP():
     """
     (1),(2)の解答
-    これは p1,…,pn, s1,…,sn について多項式時間，S について指数時間アルゴリズムである。
+    これは p1,…,pn, s1,…,sn について多項式時間, S について指数時間アルゴリズムである。
     """
     N, S, Ps, Ss = makeProblem("P")
     print(f"{N=},{S=},{Ps=},{Ss=}")
@@ -109,7 +109,7 @@ def solveP():
 def solveQ():
     """
     (3)の解答
-    これは p1,…,pn, s1,…,sn について多項式時間，S について指数時間アルゴリズムである。
+    これは p1,…,pn, s1,…,sn について多項式時間, S について指数時間アルゴリズムである。
     """
     N, S, Ps, Ss = makeProblem("Q")
     print(f"{N=},{S=},{Ps=},{Ss=}")
@@ -143,12 +143,13 @@ def solveQ():
 def solveR():
     """
     (4)の解答
-    これは p1,…,pn, s1,…,sn, w1,…,wn について多項式時間，S について指数時間アルゴリズムである。
+    これは p1,…,pn, s1,…,sn, w1,…,wn について多項式時間, S について指数時間アルゴリズムである。
     """
     N, S, W, Ps, Ss, Ws = makeProblem("R")
     print(f"{N=},{S=},{W=},{Ps=},{Ss=},{Ws=}")
     print(f"{slowR(N, S, W, Ps, Ss, Ws)=}")
 
+    # Aの引数にWを追加すれば良い
     As = [[[None for _ in range(W + 1)] for _ in range(S + 1)] for _ in range(N + 1)]
     for s in range(S + 1):
         for w in range(W + 1):
