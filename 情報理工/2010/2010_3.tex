@@ -44,7 +44,7 @@
 
 \section{問題}
 
-略
+$n$次元ユークリッド空間の有界集合について
 
 \section{解答}
 
@@ -82,21 +82,31 @@ $B$の凸性と原点対称性から、$\frac{1}{2}\qty(\bm{2x}+(-\bm{2y}))=\bm{
 \subsection*{(5)}
 
 \begin{align*}
-  B & =\left\{\{g_j\}_{1 \leq j\leq 3} \middle| \sum_{i=1}^{3}\left| \sum_{j=1}^{3}r_{ij}g_j \right| < \alpha \right\} \\
-    & =\left\{\{g_j\}_{1 \leq j\leq 3} \middle| ||R\bm{g}||_1 < \alpha \right\}
+  B & =\left\{\{g_j\}_{1 \leq j\leq 3} \middle| \sum_{i=1}^{3} \left\lvert \sum_{j=1}^{3}r_{ij}g_j \right\rvert < \alpha \right\} \\
+    & =\left\{\bm{g}\in \mathbb{R}^3 \middle| ||R\bm{g}||_1 < \alpha \right\}
 \end{align*}
 
 Bが原点対称な有界凸集合であることは明らか。
 
 あとは、$v(B)>2^n=2^3$を示せば、(4)より従う。
 
-todo : 追記
+行列式の6倍は四面体の体積を表すことに注意すると、
 
+\begin{align*}
+  v(B)=2^3 \alpha^3 \frac{1}{6\det R} \leq 2^3
+\end{align*}
+
+(ここ、もう少し説明のしようがあると思われるが、あまり良い説明が思いつかない)
+
+よって、示された。
 
 \section{知識}
 
-\begin{thebibliography}{9}
+行列式の6倍は四面体の体積を表す。\cite{site:1}
 
+\begin{thebibliography}{9}
+  \bibitem{site:1}
+  高校数学の美しい物語."四面体の体積を求める2つの公式with行列式".2021年3月7日.\url{https://manabitimes.jp/math/1012}
 \end{thebibliography}
 
 \end{document}
