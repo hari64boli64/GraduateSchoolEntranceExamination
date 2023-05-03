@@ -1,0 +1,233 @@
+\documentclass[a4paper, 10pt, dvipdfmx]{jlreq}
+
+\usepackage{ascmac}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{listings, jlisting}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage{url}
+
+\Urlmuskip=0mu plus 10mu
+\allowdisplaybreaks[4]
+\frenchspacing
+\definecolor{OliveGreen}{rgb}{0.0,0.6,0.0}
+\definecolor{Orenge}{rgb}{0.89,0.55,0}
+\definecolor{SkyBlue}{rgb}{0.28, 0.28, 0.95}
+\lstset{
+  language={c++},
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  ndkeywordstyle={\small},
+  frame=single,
+  breaklines=true,
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  lineskip=-0.9ex,
+  keywordstyle={\small\bfseries\color{SkyBlue}},  
+  commentstyle={\color{OliveGreen}}, 
+  stringstyle={\small\ttfamily\color{Orenge}}    
+}
+
+\begin{document}
+
+\title{2010年度 大問1}
+\author{hari64boli64 (hari64boli64@gmail.com)}
+\date{\today}
+\maketitle
+
+\section{問題}
+
+略 難問だと思う
+
+\section{解答}
+
+\subsection*{(1)}
+
+Aは正定値対称行列なので、$A=Q^TDQ$と書ける。
+ただし、$Q$は直交行列、$D$は要素が全て正の対角行列である。
+
+$D$はその平方根$\sqrt{D}$が取れることに注意すると、
+
+\begin{align*}
+  (Q^T\sqrt{D}Q)^2 & =(Q^T\sqrt{D}Q)(Q^T\sqrt{D}Q) \\
+                   & =Q^TDQ                        \\
+                   & =A
+\end{align*}
+
+となり、$B=Q^T\sqrt{D}Q$である。
+
+一意性を示す。$B^2=C^2=A$とする。
+
+$||x||_2=1$を満たす全ての$x$に対して、$B,C$の正定値性に注意すると、
+
+\begin{align*}
+  x^TBx & =\sqrt{(x^TBx)^2} \\
+        & =\sqrt{x^TB^2x}   \\
+        & =\sqrt{x^TC^2x}   \\
+        & =\sqrt{(x^TCx)^2} \\
+        & =x^TCx
+\end{align*}
+
+しかし、$||x||_2=1$を満たす全ての$x$に対して、
+
+\begin{align*}
+  x^T(B-C)x =0
+\end{align*}
+
+であると、これは$B-C=O \Leftrightarrow B=C$を意味する。
+
+(ここの部分の証明は、対称性などを使えば決して難しい訳ではない。しかし、簡潔な証明はよく分からなかった)
+
+よって、$B$は一意である。
+
+\subsection*{(2)}
+
+特異値分解より、$F=R' \Sigma S$と分解できる。
+ただし、$R',S$は直交行列、$\Sigma$は全ての要素が正の対角行列である。$F$が正則な為、フルランクであり、$\Sigma$の対角成分に0はない。
+
+よって、$F=R' (SS^T) \Sigma S=(R'S)(S^T\Sigma S) $と書けて、$R' S^T$は$R'$と$S$がそれぞれ直交行列な為、直交行列である。
+
+以上より、$R=R' S^T,U=S^T \Sigma S$とすれば良い。
+
+一意性については、$F^TF=U^TR^TRU=U^TU=U^2=W$とすると、$W$は正定値対称行列だが、(1)より、$U$は一意と分かる。よって、$R$も一意である。
+
+全体で一意。
+
+\subsection*{(3)}
+
+\begin{align*}
+  FR^T & =RUR^T       \\
+       & =RQ'D'Q^TR^T
+\end{align*}
+
+より、$V=FR^T$は正定値対称行列。よって、$F=VR$となる。一意性は自明。
+
+\section{知識}
+
+2020年度問1をまず参照のこと。
+
+\subsection*{(1)について}
+
+\begin{align*}
+                  & B^2         =C^2    \\
+  \Leftrightarrow & B^2-C^2     =O      \\
+  \Leftrightarrow & (B-C)(B+C)  = CB-BC \\
+\end{align*}
+
+となり、また、$B+C$は対角成分が正なので、$BC=CB \Rightarrow B=C$が言える。
+
+これは、$B$と$C$の可換性、つまり、同次対角化可能性と同値であり、その方針でも示せるはずである。
+
+\begin{itembox}[l]{同時対角化可能⇔交換可能の意味と証明\cite{site:1}}
+  $A$と$B$が同時対角化可能なとき，ある正則行列$P$が存在して$P^{-1}AP$と$P^{-1}BP$がともに対角行列となる。
+
+  対角行列どうしは交換可能なので，
+  \begin{align*}
+    (P^{-1}AP)(P^{-1}BP)=(P^{-1}BP)(P^{-1}AP)
+  \end{align*}
+
+  整理する:
+  \begin{align*}
+     & P^{-1}ABP=P^{-1}BAP \\
+     & AB=BA
+  \end{align*}
+\end{itembox}
+
+しかし、自分には分からなかった。(もしこれを誰かが読んでいるのであれば教えて欲しい……)
+
+計数の人のブログらしきものもあった。\cite{site:2}
+
+\subsection*{(2)}
+
+直交行列と直交行列の積は直交行列であることは、簡単に示せる。
+
+\begin{align*}
+  (RS)^T(RS)=S^TR^TRS=I
+\end{align*}
+
+特異値分解についてまとめる。
+
+\begin{itembox}[l]{特異値分解の定義，性質，具体例\cite{site:3}}
+  特異値分解とは、$m\times n$行列$A$を$A=U \Sigma V$と分解することです。ただし、
+
+  \begin{quote}
+    \begin{itemize}
+      \item $U$は$m \times m$の直交行列（各列が互いに直交する行列）
+      \item $V$は$n \times n$の直交行列
+      \item $\Sigma$は ... 非対角成分は0、対角成分は非負で大きさの順に並んだ行列
+    \end{itemize}
+  \end{quote}
+
+  です。任意の行列はこのように分解できます。また，$Σ$の対角成分で 0でないもの（0を含めることもある）を特異値と言います。
+\end{itembox}
+
+なお、行列の(0でない)特異値の数は、その行列のランクと一致する。
+
+以下に、参考文献の続きを載せると、
+
+\begin{itembox}[l]{特異値分解の定義，性質，具体例\cite{site:3}}
+  $A$が対称行列のとき、$A$の固有値と特異値は一致します。対称行列は直交行列で対角化できるからです。
+
+  $A^TA$の0でない固有値の正の平方根は$A$の特異値です。理由は、$A=U\Sigma V$と特異値分解できるとき$A^TA=V^T(\Sigma^T\Sigma)V$と固有値分解できるからです。同様に$AA^T$の0でない固有値の正の平方根も$A$の特異値です。
+\end{itembox}
+
+となっている。
+
+\subsection*{行列分解}
+
+本問を解く際に、特異値分解以外の分解に関しても考慮したが、知識が足りず苦労した。それを以下に簡単にまとめる。
+
+QR分解を用いて解くことも出来るのだろうか?
+
+\subsubsection*{LU分解}
+
+以下、参考文献\cite{site:4}より引用。
+
+正方行列$A$を下三角行列$L$と上三角行列$U$との積によって、$A=LU$と表すことをLU分解(lower-upper(LU) decomposition)という。
+
+行列がLU分解可能であるための必要十分条件は、全ての主座小行列の行列式が0でないことである。
+
+\subsection*{QR分解}
+
+以下、参考文献\cite{site:5}より引用。
+
+QR分解（キューアールぶんかい、英: QR decomposition, QR factorization）とは、$m \times n$ 実行列$A$を、$m$次直交行列$Q$と$m \times  n$上三角行列$R$との積への分解により表すこと、またはそう表した表現をいう。このような分解は常に存在する。
+
+QR分解は線型最小二乗問題を解くために使用される。また、固有値問題の数値解法の1つであるQR法の基礎となっている。
+
+すべての実正方行列$A$は直交行列$Q$と上三角行列(別名右三角行列)$R$を用いて$A=QR$と分解できる。もし$A$が正則ならば、$R$の対角成分が正になるような因数分解は一意に定まる。
+
+QR分解を計算する手法として、グラム・シュミット分解、ハウスホルダー変換、ギブンス回転などがある。
+
+\subsection*{コレスキー分解}
+
+以下、参考文献\cite{site:6}より引用。
+
+行列$A$を下三角行列$C$とその転置行列の $C^T$の積に分解すること、すなわち、$A=CC^T$と分解することを、コレスキー分解 (cholesky decomposition) という。
+
+行列$A$が正定値行列であるならば、 コレスキー分解可能である。
+
+\begin{thebibliography}{9}
+  \bibitem{site:1}
+  高校数学の美しい物語."同時対角化可能⇔交換可能の意味と証明".2021年3月7日.\url{https://manabitimes.jp/math/1196}
+  \bibitem{site:2}
+  Lilliput Steps.“半正定値行列の平方根行列の存在と一意性”.HatenaBlog.2020年5月6日.\url{https://kagamiz.hatenablog.com/entry/2020/05/16/212214}
+  \bibitem{site:3}
+  高校数学の美しい物語."特異値分解の定義，性質，具体例".2022年11月3日.\url{https://manabitimes.jp/math/1280}
+  \bibitem{site:4}
+  理数アラカルト."LU分解を解説 ～具体例と必要十分条件～".2022年4月17日.\url{http://risalc.info/src/LU-decomposition.html}
+  \bibitem{site:5}
+  Wikipedia."QR分解".2022年11月20日.\url{https://ja.wikipedia.org/wiki/QR%E5%88%86%E8%A7%A3}
+  \bibitem{site:6}
+  理数アラカルト."コレスキー分解とは?".2023年4月2日.\url{http://risalc.info/src/cholesky-decomposition.html}
+\end{thebibliography}
+
+\end{document}
