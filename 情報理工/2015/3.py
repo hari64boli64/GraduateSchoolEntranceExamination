@@ -23,7 +23,7 @@ ax1.set_title("flow in cartesian coordinate")
 # 極座標表示
 ax2 = plt.subplot(222, projection="polar")
 raw_r = np.linspace(0, MAX_R, 100 + 1)
-raw_p = np.linspace(-math.pi, math.pi, 360 * 10 + 1)
+raw_p = np.linspace(0, 2 * math.pi, 360 * 10 + 1)
 r, p = np.meshgrid(raw_r, raw_p)
 drdt = r - r**3
 dpdt = 1 - np.cos(p)
