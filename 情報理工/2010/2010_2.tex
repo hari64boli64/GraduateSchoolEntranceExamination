@@ -1,0 +1,105 @@
+\documentclass[a4paper, 10pt, dvipdfmx]{jlreq}
+
+\usepackage{diagbox}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{listings, jlisting}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage{url}
+
+\Urlmuskip=0mu plus 10mu
+\allowdisplaybreaks[4]
+\frenchspacing
+\definecolor{OliveGreen}{rgb}{0.0,0.6,0.0}
+\definecolor{Orenge}{rgb}{0.89,0.55,0}
+\definecolor{SkyBlue}{rgb}{0.28, 0.28, 0.95}
+\lstset{
+  language={c++},
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  ndkeywordstyle={\small},
+  frame=single,
+  breaklines=true,
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  lineskip=-0.9ex,
+  keywordstyle={\small\bfseries\color{SkyBlue}},  
+  commentstyle={\color{OliveGreen}}, 
+  stringstyle={\small\ttfamily\color{Orenge}}    
+}
+
+\begin{document}
+
+\title{2010年度 大問2}
+\author{hari64boli64 (hari64boli64@gmail.com)}
+\date{\today}
+\maketitle
+
+\section{問題}
+
+
+\begin{table}[hbtp]
+  \caption{Probabilities of $X$ and $Y$}
+  \label{table:prob}
+  \centering
+  \begin{tabular}{c|cc}
+    \diagbox{Y}{X} & 0(1-$\epsilon$) & 1($\epsilon$) \\
+    \hline
+    0              & 0.9             & 0.1           \\
+    1              & 0.1             & 0.9           \\
+  \end{tabular}
+\end{table}
+
+\section{解答}
+
+\subsection*{(1)}
+
+$P(X=1|Y=0)=\frac{P(X=1,Y=0)}{P(Y=0)}=\frac{0.1\epsilon}{0.9-0.8\epsilon}$
+
+\subsection*{(2)}
+
+\begin{align*}
+  P(X=1|Z_n=z_n) & =\frac{P(X=1,Z_n=z_n)}{P(Z_n=z_n)}                                                                                                              \\
+                 & =\frac{\epsilon 0.9^{z_n} 0.1^{n-z_n} {}_nC_{z_n}}{\epsilon 0.9^{z_n} 0.1^{n-z_n} {}_nC_{z_n} + (1-\epsilon) 0.1^{z_n} 0.9^{n-z_n} {}_nC_{z_n}} \\
+                 & =\frac{\epsilon 0.1^{n-z_n}}{\epsilon 0.1^{n-z_n} + (1-\epsilon) 0.9^{n-z_n}}                                                                   \\
+\end{align*}
+
+\subsection*{(3)}
+
+確率0.1で+1、確率0.9で-1されるランダムウォークを考える。
+
+初めて+2か-2に到達するまでのステップ数の期待値が答え。
+
+漸化式をたてて解くと、座標0には偶数回目のみ非負の確率で存在し、$n$回目だと、確率は$0.18^{n/2}$である。
+
+この結果から、期待値は、
+
+\begin{align*}
+  \sum_{n=0,2|n}^{\infty}n 0.18^{\frac{n-2}{2}} (0.9^2+0.1^2) = & \frac{2\times 0.82}{0.18}\sum_{n=1}^{\infty/2}n(0.18)^n \\
+  =                                                             & \frac{1.64}{0.18}\frac{0.18}{(1-0.18)^2}                \\
+  =                                                             & 2.439024390243902\cdots
+\end{align*}
+
+となる。
+
+2ステップで終了するのが確率0.82で起きるので、全体で大体2.5ステップ程度というのは、直感にも合っている。
+
+\section{知識}
+
+似た話として、カタラン数があるが、今回は関係なかった。
+
+\section{おまけ}
+
+\lstinputlisting[caption=randomWalk,label=code:randomWalk,language=Python]{2.py}
+
+average: 2.43544
+
+\end{document}
