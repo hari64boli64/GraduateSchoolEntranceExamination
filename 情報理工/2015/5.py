@@ -19,7 +19,7 @@ def problem1(sigma, n, S):
 
     # 1. max(D_i)を求めるのに必要な、
     #    各Aの要素に関して最後の出現位置を記録する配列を用意する
-    #    空間 O(sigma) 時間 O(sigma)
+    #    空間 O(𝜎) 時間 O(𝜎)
     last = [0 for _ in range(sigma)]
 
     # 2. 各iについて、d(i)を計算する
@@ -85,8 +85,12 @@ def trial():
 def computeSumOfd():
     # 問題(4)の解答
 
-    # todo
-    # 今のところ良い証明は思いついてない……
+    #   ∑𝑑 ≤ 𝑘𝑛
+    # ⇒ 1/𝑛 ∑𝑑 ≤ 𝑘
+    # logの凸性より、
+    #   1/𝑛 ∑ log 𝑑 ≤ log (1/𝑛 ∑ 𝑑) ≤ log 𝑘
+    # ⇒ ∑ log 𝑑 ≤ 𝑛 log 𝑘
+
 
     sigma, n, S, k = makeProblem(size=10000)
     print(f"{sigma=}, {n=}, {k=}")
