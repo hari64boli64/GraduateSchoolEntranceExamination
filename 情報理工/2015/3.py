@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 MAX_R = 3
-fig = plt.figure(figsize=(15, 15))
+fig = plt.figure(figsize=(10, 10))
 fig.suptitle("Problem 3", fontsize=20)
 
 
