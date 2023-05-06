@@ -19,7 +19,7 @@ def problem1(sigma, n, S):
 
     # 1. max(D_i)を求めるのに必要な、
     #    各Aの要素に関して最後の出現位置を記録する配列を用意する
-    #    空間 O(𝜎) 時間 O(𝜎)
+    #    空間 O(sigma) 時間 O(sigma)
     last = [0 for _ in range(sigma)]
 
     # 2. 各iについて、d(i)を計算する
@@ -50,7 +50,7 @@ def problem3(sigma, n, S):
 
     # ならし計算量の解析に近い
     # Sに現れる要素それぞれに注目して見ると、
-    # 全体で見る回数は必ずnで抑えられる
+    # 総計で見る回数は必ずnで抑えられる
     # よって、全体でO(nk)
 
     for i in range(n):
@@ -85,11 +85,11 @@ def trial():
 def computeSumOfd():
     # 問題(4)の解答
 
-    #   ∑𝑑 ≤ 𝑘𝑛
-    # ⇒ 1/𝑛 ∑𝑑 ≤ 𝑘
+    #   \sum d <= kn
+    # ⇒ 1/n \su d <= k
     # logの凸性より、
-    #   1/𝑛 ∑ log 𝑑 ≤ log (1/𝑛 ∑ 𝑑) ≤ log 𝑘
-    # ⇒ ∑ log 𝑑 ≤ 𝑛 log 𝑘
+    #   1/n \sum log d <= log (1/n \sum d) <= log k
+    # ⇒ \sum log d <= n log k
 
 
     sigma, n, S, k = makeProblem(size=10000)
