@@ -1,0 +1,114 @@
+\documentclass[a4paper, 10pt, dvipdfmx]{jlreq}
+
+\usepackage{ascmac}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{listings, jlisting}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage{url}
+
+\Urlmuskip=0mu plus 10mu
+\allowdisplaybreaks[4]
+\frenchspacing
+\definecolor{OliveGreen}{rgb}{0.0,0.6,0.0}
+\definecolor{Orenge}{rgb}{0.89,0.55,0}
+\definecolor{SkyBlue}{rgb}{0.28, 0.28, 0.95}
+\lstset{
+  language={c++},
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  ndkeywordstyle={\small},
+  frame=single,
+  breaklines=true,
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  lineskip=-0.9ex,
+  keywordstyle={\small\bfseries\color{SkyBlue}},  
+  commentstyle={\color{OliveGreen}}, 
+  stringstyle={\small\ttfamily\color{Orenge}}    
+}
+
+\begin{document}
+
+\title{2016年度 大問1}
+\author{hari64boli64 (hari64boli64@gmail.com)}
+\date{\today}
+\maketitle
+
+\section{問題}
+
+正定値対称行列の$\tr$について
+
+\begin{align*}
+  Q    & =\sqrt{B^TB}^{-1}B^T=B^T \sqrt{B^TB}^{-1} \\
+  g(L) & =\tr\{(I-L)G(I-L)^T\}                     \\
+\end{align*}
+
+\section{解答}
+
+\subsection*{(1)}
+
+既出 (2010年大問1(1))
+
+\subsection*{(2)}
+
+$B^TB$は$n$次の正定値対称行列なので、$B^TB=A=R^2$と置くと、
+
+\begin{align*}
+  QB=\sqrt{B^TB}^{-1}B^TB=R^{-1}R^2=R
+\end{align*}
+
+となる。直交行列の積は直交行列になることに注意すると、$\tr(Q'R)$を最大にする直交行列$Q'$を求める問題に、本問は帰着される。もし$Q'=I$であるならば、この$Q$が確かに$\tr(QB)=\tr(R)$を最大化している。
+
+ここで、
+
+\begin{align*}
+  \tr(Q'R) & =\tr(Q'P^TDP) \quad (R=P^TDP)      \\
+           & =\tr(PQ'P^TD)                      \\
+           & =\sum_{i=1}^{n}(PQ'P^T)_{ii}D_{ii} \\
+\end{align*}
+
+である。ただし、$P$は直交行列、$D$は対角行列である。これは、$R$が正定値対称行列であることから従う分解である。
+
+直交行列の対角成分は、必ず1以下。気付くのが難しいが、証明は容易で、各行ベクトルのノルムが定義より1になることから従う。
+
+$D$の対角成分も$R$の正定値性より正であるため、この式は$(PQ'P^T)_{ii}=1$で最大となる。
+
+そして、そのような直交行列として$Q'=I$を取れば、その上界は達成される。よって、題意は示された。
+
+\subsection*{(3)}
+
+\begin{align*}
+  g(L) & =\tr\{(I-L)G(I-L)^T\}   \\
+       & =\tr\{G-GL^T-LG+LGL^T\} \\
+       & =\tr(G+H)-\tr(GL^T+LG)  \\
+       & =\tr(G+H)-2\tr(LG)      \\
+\end{align*}
+
+よって、$g(L)$の最大化は、$\tr(LG)$の最小化と等価。
+
+(以下不明。答えはどうせ$\sqrt{H}\sqrt{G}^{-1}$だと思う)
+
+\section{知識}
+
+todo
+
+\begin{itembox}[l]{問題}
+  $\tr(ABC)=\tr(CAB)=\tr(BCA)$は成立しますが、
+  $\tr(ABC)=\tr(ACB)$などは成立するとは限りません。
+  \url{https://manabitimes.jp/math/1135}
+\end{itembox}
+
+\begin{thebibliography}{9}
+
+\end{thebibliography}
+
+\end{document}
