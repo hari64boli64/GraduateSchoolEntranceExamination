@@ -44,16 +44,66 @@
 
 \section{問題}
 
+$I=[0,1],I_1=[0,\frac{1}{2}],I_2=[\frac{1}{2},1]$
+
+\begin{align*}
+  f(x)=\begin{cases}
+    x+\frac{1}{2} & (x\in I_1)  \\
+    2-2x          & (x \in I_2)
+  \end{cases}
+\end{align*}
+
 \section{解答}
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=140mm]{4.png}
+    \caption{$f^n(x)$}
+    \label{img:fnx}
+  \end{center}
+\end{figure}
 
 \subsection*{(1)}
 
+$J$は閉区間であって、閉集合ではないことに注意。
+
+この点さえ分かっていれば、中間値の定理より自明。
+
 \subsection*{(2)}
+
+\subsubsection*{(2-1)}
+
+不明
+
+\subsubsection*{(2-2)}
+
+自明
+
+\subsubsection*{(2-3)}
+
+存在性は不明。
+
+一意性は(2-2)より自明。
 
 \subsection*{(3)}
 
+隣接行列の意味より自明。(大嘘)
+
+\subsection*{(4)}
+
+対角化して求めればよい。(todo)
+
+実は、フィボナッチ数列が出てくる。(おまけ参照)
+
+よって、ビネの公式より、求める値は$\frac{1+\sqrt{5}}{2}$となる。
+
 \section{知識}
 
+ビネの公式は、以下の通り。\cite{site:binet}
+
+\begin{align*}
+  F_n=\frac{1}{\sqrt{5}}\left\{ \left( \frac{1+\sqrt{5}}{2} \right)^n - \left( \frac{1-\sqrt{5}}{2} \right)^n \right\}
+\end{align*}
 
 \section{おまけ}
 
@@ -84,7 +134,8 @@ math.log((1+math.sqrt(5))/2)=0.48121182505960347
 \end{lstlisting}
 
 \begin{thebibliography}{9}
-
+  \bibitem{site:binet}
+  高校数学の美しい物語."フィボナッチ数列の7つの性質（一般項・黄金比・互いに素）".2021年8月17日.\url{https://manabitimes.jp/math/643}
 \end{thebibliography}
 
 \end{document}
