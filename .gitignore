@@ -27,3 +27,4 @@
 *.toc
 
 __pycache__/
+.vscode/
