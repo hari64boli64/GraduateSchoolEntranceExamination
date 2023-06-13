@@ -12,7 +12,7 @@ def BEGIN_DOCUMENT(text):
 \usepackage[dvipdfmx]{graphicx}
 \usepackage[dvipdfmx]{color}
 \usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
-\usepackage{listings, jlisting}
+\usepackage{listings}
 \usepackage{tikz}
 \usepackage{physics}
 \usepackage{url}
