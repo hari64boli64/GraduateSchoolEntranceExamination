@@ -7,7 +7,7 @@
 \usepackage[dvipdfmx]{graphicx}
 \usepackage[dvipdfmx]{color}
 \usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
-\usepackage{listings, jlisting}
+\usepackage{listings}
 \usepackage{tikz}
 \usepackage{physics}
 \usepackage{url}
@@ -44,15 +44,17 @@
 
 \section{問題}
 
+N=1の場合などには破綻するが、それは無視する。
+
 \section{解答}
 
 \subsection*{(1)}
 
 \begin{align*}
   \det A=\begin{cases}
-    2 & (N \text{ is odd})  \\
-    0 & (N \text{ is even})
-  \end{cases}
+           2 & (N \text{ is odd})  \\
+           0 & (N \text{ is even})
+         \end{cases}
 \end{align*}
 
 \subsection*{(2)}
