@@ -1,0 +1,105 @@
+\documentclass[a4paper, 10pt, dvipdfmx]{jlreq}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage{url}
+
+\Urlmuskip=0mu plus 10mu
+\allowdisplaybreaks[4]
+\frenchspacing
+\definecolor{OliveGreen}{rgb}{0.0,0.6,0.0}
+\definecolor{Orenge}{rgb}{0.89,0.55,0}
+\definecolor{SkyBlue}{rgb}{0.28, 0.28, 0.95}
+\lstset{
+  language={c++},
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  ndkeywordstyle={\small},
+  frame=single,
+  breaklines=true,
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  lineskip=-0.9ex,
+  keywordstyle={\small\bfseries\color{SkyBlue}},  
+  commentstyle={\color{OliveGreen}}, 
+  stringstyle={\small\ttfamily\color{Orenge}}    
+}
+
+\begin{document}
+
+\title{2017年度 大問3}
+\author{hari64boli64 (hari64boli64@gmail.com)}
+\date{\today}
+\maketitle
+
+\section{問題}
+
+累積分布関数の逆関数
+
+\section{解答}
+
+\subsection*{(1)}
+
+\begin{align*}
+    R[T]=\frac{(1-p)\log(1-p)+p\log{p}}{p-1}
+\end{align*}
+
+\subsection*{(2)}
+
+確率密度関数を$P$とする。
+
+\begin{align*}
+    \mathrm{Pr}(B) & = \int_{x \in B} P(x) \dd{x}                       \\
+                   & = \int P(x) \dd{x} - \int_{x \notin B} P(x) \dd{x} \\
+                   & = 1 - \int_{x \notin B} P(x) \dd{x}                \\
+                   & = 1 - \int_{\int_0^x P(x) \dd{x} < p} P(x) \dd{x}  \\
+                   & = 1 - p                                            \\
+\end{align*}
+
+最後に、$P(x) \geq 0$から導かれる、範囲についての単調性を用いた(もう少し厳密なやり方があるかも)。
+
+\begin{align*}
+    R[X] & =\frac{1}{1-p}\int_p^1 F_X^{-1}(u) \dd{u}                                                            \\
+         & =\frac{1}{1-p}\int_{u \geq p} F_X^{-1}(u) \dd{u}                                                     \\
+         & =\frac{1}{1-p}\int_{F(x) \geq p} P(x)x \dd{x} \; \qty(\because F_X(x)=u, \dv{u}{x}=\dv{F_X}{x}=P(x)) \\
+         & =\frac{1}{1-p}\int P(x) (xI_B) \dd{x}                                                                \\
+\end{align*}
+
+
+$x \in B \setminus A \Rightarrow x \geq F_X^{-1}(p), x \in A \setminus B \Rightarrow x < F_X^{-1}(p)$より、
+
+\begin{align*}
+    \int_{x\in B \setminus A} xP(x)dx & \leq F_X^{-1}(p)\mathrm{Pr}(B \setminus A)                                              \\
+                                      & = F_X^{-1}(p)\mathrm{Pr}(A \setminus B) \; (\because \mathrm{Pr}(A)=\mathrm{Pr}(B)=1-p) \\
+                                      & \leq \int_{x\in A \setminus B} xP(x)dx
+\end{align*}
+
+ただし、一つ目の不等号における等号は$\mathrm{B \setminus A}=0$の時に成立する($A=B$とは、厳密には言えない)。
+
+\subsection*{(3)}
+
+$A=\qty(X+Y \geq F_{X+Y}^{-1}(p)),B=\qty(X \geq F_X^{-1}(p)),C=\qty(Y \geq F_Y^{-1}(p))$とする。
+
+$\mathrm{Pr}(A)=\mathrm{Pr}(B)=1-p$であることから、(2)後半より、$\mathrm{E}[X \cdot I_A] \leq \mathrm{E}[X \cdot I_B]$である。
+
+同様に、$\mathrm{E}[Y \cdot I_A] \leq \mathrm{E}[Y \cdot I_C]$である。
+
+よって、
+
+\begin{align*}
+                    & \mathrm{E}[X \cdot I_A]+ \mathrm{E}[Y \cdot I_A] \leq \mathrm{E}[X \cdot I_B] + \mathrm{E}[Y \cdot I_C]                             \\
+    \Leftrightarrow & \mathrm{E}\qty[(X+Y) \cdot I_{X+Y \geq F_{X+Y}^{-1}(p)}] \leq E[X \cdot I_{X \geq F_X^{-1}(p)}] + E[Y \cdot I_{Y \geq F_Y^{-1}(p)}] \\
+    \Leftrightarrow & \mathrm{R}[X+Y] \leq \mathrm{R}[X] + \mathrm{R}[Y]
+\end{align*}
+
+\end{document}
