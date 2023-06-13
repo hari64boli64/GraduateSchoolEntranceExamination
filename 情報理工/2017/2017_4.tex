@@ -1,0 +1,107 @@
+\documentclass[a4paper, 10pt, dvipdfmx]{jlreq}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{listings, jlisting}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage{url}
+
+\Urlmuskip=0mu plus 10mu
+\allowdisplaybreaks[4]
+\frenchspacing
+\definecolor{OliveGreen}{rgb}{0.0,0.6,0.0}
+\definecolor{Orenge}{rgb}{0.89,0.55,0}
+\definecolor{SkyBlue}{rgb}{0.28, 0.28, 0.95}
+\lstset{
+  language={c++},
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  ndkeywordstyle={\small},
+  frame=single,
+  breaklines=true,
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  lineskip=-0.9ex,
+  keywordstyle={\small\bfseries\color{SkyBlue}},  
+  commentstyle={\color{OliveGreen}}, 
+  stringstyle={\small\ttfamily\color{Orenge}}    
+}
+
+\begin{document}
+
+\title{2017年度 大問4}
+\author{hari64boli64 (hari64boli64@gmail.com)}
+\date{\today}
+\maketitle
+
+\section{問題}
+
+歪対称行列など
+
+\section{解答}
+
+\subsection*{(1)}
+
+\begin{align*}
+    [(M,X),X]   & =(M,X)X-X(M,X)     \\
+                & =MX^2+XMX-XMX-X^2M \\
+                & =MX^2-X^2M         \\
+    [(M,X),X]^T & =(MX^2-X^2M)^T     \\
+                & =MX^2-X^2M
+\end{align*}
+
+よって、
+
+\begin{align*}
+    \dv{(X-X^T)}{t}=0 \\
+\end{align*}
+
+これは、初期状態が対称行列であることと合わせると、常に$X=X^T$であることを示す。
+
+\subsection*{(2)}
+
+\begin{align*}
+    (M,X)^T & =M^TX^T+X^TM^T \\
+            & =-MX-XM        \\
+            & =-(M,X)
+\end{align*}
+
+より、$(M,X)$は歪対称行列である。
+
+よって、
+
+\begin{align*}
+    \dv{X}{t} & =\dv{Q}{t}X_0Q^T+QX_0\dv{Q^T}{t} \\
+              & =(M,X)QX_0Q^T+QX_0Q^T(M,X)^T     \\
+              & =(M,X)X+X(M,X)^T                 \\
+              & =(M,X)X-X(M,X)                   \\
+              & =[(M,X),X]
+\end{align*}
+
+となり、示される。
+
+\subsection*{(3)}
+
+$Q$が直交行列であれば、同じ固有値を持つ。
+
+\begin{align*}
+    \dv{Q^TQ}{t} & =Q^T(M,X)^TQ+Q^T(M,X)Q \\
+                 & =-Q^T(M,X)Q+Q^T(M,X)Q  \\
+                 & =0
+\end{align*}
+
+これは、初期状態が単位行列であることと合わせると、常に$Q^TQ=I$であることを示す。
+
+(何故か$\dv{QQ^T}{t}=0$を示す方針は、未だ不明)
+
+\subsection*{(4)}
+
+\end{document}
