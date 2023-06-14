@@ -46,6 +46,41 @@
 
 ラプラシアン行列
 
-詳細略
+\subsection*{(1)}
+経路数
+
+\subsection*{(2)}
+ケーリーハミルトンの定理より、背理法
+
+\subsection*{(3)}
+\begin{align*}
+                  & \sum_{j=1}^{n}{0}=0                             \\
+  \Leftrightarrow & \sum_{j=1}^{n}{0u_j}=0                          \\
+  \Leftrightarrow & \sum_{j=1}^{n}\qty(\sum_{i=1}^{n}{L_{ij}})u_j=0 \\
+  \Leftrightarrow & \sum_{i=1}^{n}\sum_{j=1}^{n}{L_{ij}u_j}=0       \\
+  \Leftrightarrow & \sum_{i=1}^{n}{(Lu)_i}=0                        \\
+  \Leftrightarrow & \sum_{i=1}^{n}{\lambda u_i}=0                   \\
+  \Leftrightarrow & \sum_{i=1}^{n}{u_i}=0                           \\
+\end{align*}
+
+\subsection*{(4)}
+\begin{align*}
+  \bm{x}^T L \bm{x} & =\sum_{i,j}x_i L_{ij} x_j                                                                \\
+                    & =\sum_{i,j}x_i (D_{ij}-A_{ij}) x_j                                                       \\
+                    & =\sum_{i}x_i^2 D_{ii}-\sum_{i<j}x_i x_j A_{ij}- \sum_{i>j}x_i x_j A_{ij}                 \\
+                    & =\sum_{i}\qty(x_i^2 \sum_{j}{A_{ij}})-\sum_{i<j}x_i x_j A_{ij}- \sum_{i<j}x_j x_i A_{ji} \\
+                    & =\sum_{i<j}(x_i^2 -2x_i x_j +x_j^2) A_{ij}                                               \\
+                    & =\sum_{i<j}a_{ij}(x_i -x_j)^2                                                            \\
+                    & \geq 0
+\end{align*}
+
+\subsection*{(5)}
+
+$\dv{\bm{x}}{t}=-L\bm{x}$より、$\bm{x}(t)=e^{-Lt}\bm{x}(0)$となる。
+
+Lの固有値が全て非負実数の為、$\bm{\overline{x}}=\lim_{t \to \infty}\bm{x}(t) = \bm{0}$となる。
+
+また、収束の速さは$L$の固有値に依存する。
+
 
 \end{document}
