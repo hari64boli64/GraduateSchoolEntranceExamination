@@ -8,7 +8,7 @@
 \usepackage[dvipdfmx]{graphicx}
 \usepackage[dvipdfmx]{color}
 \usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
-\usepackage{listings, jlisting}
+\usepackage{listings}
 \usepackage{tikz}
 \usepackage{physics}
 \usepackage{url}
@@ -92,7 +92,7 @@ $P(Y_1=a)=\int_0^a{f(x;\mu)}dx=1-e^{-\frac{a}{\mu}}$より、$P(M=m) = {}_NC_m (
                                 & = P\left( am + \sum_{i=1}^{N-m} (Y_i+a)  \leq Nb \right) \\
                                 & = P\left( \sum_{i=1}^{N-m} Y_i  \leq N(b-a) \right)      \\
                                 & = \int_0^{N(b-a)} f_{N-m}(y) dy                          \\
-                                & = \int_a^{b} Nf_{N-m}(Ny-a) dy                           \\
+                                & = \int_a^{b} Nf_{N-m}(N(y-a)) dy                         \\
 \end{align*}
 
 ただし、一行目から二行目の変形で、指数分布の無記憶性を用いた。
@@ -104,9 +104,9 @@ $P(Y_1=a)=\int_0^a{f(x;\mu)}dx=1-e^{-\frac{a}{\mu}}$より、$P(M=m) = {}_NC_m (
 以上より、
 
 \begin{align*}
-    P(M=m,\overline{Y}\leq b) & = P(M=m)P(\overline{Y} \leq b|M=m)                                                                                                          \\
-                              & = {}_NC_m (1-e^{-\frac{a}{\mu}})^m(e^{-\frac{a}{\mu}})^{N-m} \int_a^{b} N f_{N-m}(Ny-a) dy                                                  \\
-                              & = {}_NC_m (1-e^{-\frac{a}{\mu}})^m(e^{-\frac{a}{\mu}})^{N-m} \int_a^{b} \frac{N}{(N-m-1)!\mu^{N-m}} (Ny-a)^{N-m-1} e^{-\frac{Ny-a}{\mu}} dy \\
+    P(M=m,\overline{Y}\leq b) & = P(M=m)P(\overline{Y} \leq b|M=m)                                                                                                            \\
+                              & = {}_NC_m (1-e^{-\frac{a}{\mu}})^m(e^{-\frac{a}{\mu}})^{N-m} \int_a^{b} N f_{N-m}(N(y-a)) dy                                                  \\
+                              & = {}_NC_m (1-e^{-\frac{a}{\mu}})^m(e^{-\frac{a}{\mu}})^{N-m} \int_a^{b} \frac{N}{(N-m-1)!\mu^{N-m}} (N(y-a))^{N-m-1} e^{-\frac{Ny-a}{\mu}} dy \\
 \end{align*}
 
 \subsection*{(4)}
@@ -114,7 +114,7 @@ $P(Y_1=a)=\int_0^a{f(x;\mu)}dx=1-e^{-\frac{a}{\mu}}$より、$P(M=m) = {}_NC_m (
 $\mu$に関連する部分だけ取り出すと、
 
 \begin{align*}
-    M(\mu) & = (1-e^{-\frac{a}{\mu}})^m(e^{-\frac{a}{\mu}})^{N-m}  \frac{1}{\mu^{N-m}} e^{-\frac{Ny-a}{\mu}}
+    M(\mu) & = (1-e^{-\frac{a}{\mu}})^m(e^{-\frac{a}{\mu}})^{N-m}  \frac{1}{\mu^{N-m}} e^{-\frac{N(y-a)}{\mu}}
 \end{align*}
 
 となるが、これを微分するのは大変な困難を伴うように思われる。
