@@ -1,0 +1,235 @@
+\documentclass[a4paper, 10pt, dvipdfmx]{jlreq}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage{url}
+
+\Urlmuskip=0mu plus 10mu
+\allowdisplaybreaks[4]
+\frenchspacing
+\definecolor{OliveGreen}{rgb}{0.0,0.6,0.0}
+\definecolor{Orenge}{rgb}{0.89,0.55,0}
+\definecolor{SkyBlue}{rgb}{0.28, 0.28, 0.95}
+\lstset{
+  language={c++},
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  ndkeywordstyle={\small},
+  frame=single,
+  breaklines=true,
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  lineskip=-0.9ex,
+  keywordstyle={\small\bfseries\color{SkyBlue}},  
+  commentstyle={\color{OliveGreen}}, 
+  stringstyle={\small\ttfamily\color{Orenge}}    
+}
+
+\begin{document}
+
+\title{2023年度 大問4}
+\author{hari64boli64 (hari64boli64@gmail.com)}
+\date{\today}
+\maketitle
+
+\section{問題}
+
+$Y=\frac{1}{X^2}$
+
+\section{解答}
+
+\subsection*{(1)}
+
+確率変数の変数変換の公式を用いると、
+また、$X=\pm\frac{1}{\sqrt{Y}}$と、2つの解があることに注意すると、
+\begin{align*}
+  f(y) & = \begin{cases}
+             2 \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2y}} \abs{\dv{x}{y}} & (0<y)              \\
+             0                                                        & (\text{otherwise})
+           \end{cases} \\
+       & = \begin{cases}
+             \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2y}} y^{-\frac{3}{2}} & (0<y)              \\
+             0                                                       & (\text{otherwise})
+           \end{cases}
+\end{align*}
+となる。
+
+なお、実際、$\int_0^{\infty}\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2y}} y^{-\frac{3}{2}}\dd{y}=1$である。
+(Wolfram Alphaで計算)
+
+\subsection*{(2)}
+
+\begin{align*}
+  \dv{L(u)}{u} & =\dv{u} \int_0^{\infty} {e^{-uy}f(y)}\dd{y}                                                                        \\
+               & =\int_0^{\infty} \dv{u} e^{-uy}f(y) \dd{y}                                                                         \\
+               & =\int_0^{\infty}  {-y e^{-uy}f(y)} \dd{y}                                                                          \\
+               & =-\frac{1}{\sqrt{2\pi}}\int_0^{\infty}  {e^{-uy}e^{-\frac{1}{2y}}y^{-\frac{1}{2}}} \dd{y}                          \\
+               & =\frac{1}{2u\sqrt{2\pi}} \int_0^{\infty} {e^{-\frac{1}{2z}}e^{-uz}\qty(\frac{1}{2uz})^{-\frac{1}{2}}z^{-2}} \dd{z} \\
+               & =\sqrt{2u}\frac{1}{\sqrt{2\pi}}\int_0^\infty e^{-\frac{1}{2z}}e^{-uz}z^{-\frac{3}{2}} \dd{z}                       \\
+               & =\sqrt{2u}L(u)
+\end{align*}
+
+微分と積分が交換できることは、$f(y)$が確率密度関数であるため被積分関数が可積分であり、また、微分後の式も可積分であることから従う。
+
+$\frac{1}{2y}=uz$という変数変換が本質的。
+見つけた人曰く、「$\exp(-uy),\exp(-\frac{1}{2}y)$の形を保存するにはどうすればいいのかなぁと思って、いろいろ気合いで推測」したらしいです。
+
+\subsection*{(3)}
+
+(2)の式に当てはめて$L(-iu)=e^{-\sqrt{2u}\sqrt{-i}}$としたい所だが、これは厳密な解答ではない。
+
+以下Slackにあがっていた解答の書き起こし。
+なお、この解答の作成者は数学科の複素関数論を履修されていた方です。
+(私には無理……)
+
+\begin{align*}
+  D & =\left\{ re^{i\theta}\in \mathbb{C} | r>0, -\frac{\pi}{2} < \theta < \frac{\pi}{2} \right\} \\
+  E & =\left\{ re^{i\theta}\in \mathbb{C} | r>0, -\frac{\pi}{4} < \theta < \frac{\pi}{4} \right\}
+\end{align*}
+とおく。
+
+\begin{align*}
+  E \to D, \; & z \mapsto z^2                                                                  \\
+  D \to E, \; & z \mapsto \sqrt{z} \; \qty(re^{i\theta} \mapsto \sqrt{r}e^{i\frac{\theta}{2}})
+\end{align*}
+は正則かつ全単射で互いに逆写像。
+
+ここで、$L$は$D$で正則、$\overline{D}$で連続である。この証明は後述。
+
+実軸正の部分で、
+\begin{equation*}
+  \dv{L}{u} {}(u)=-\frac{1}{\sqrt{2u}}L(u)
+\end{equation*}
+が成り立つから、両辺が$D$上で正則な為、一致の定理より、$D$上
+\begin{equation*}
+  \dv{L}{z} {}(z)=-\frac{1}{\sqrt{2z}}L(z)
+\end{equation*}
+が成立する。
+
+$E$上で$M(z)=L(z^2)$とおけば、上式より、
+\begin{align*}
+  \dv{M}{z}(z) & =\dv{L}{z}{}(z^2)2z                                          \\
+               & =-\frac{1}{\sqrt{2z^2}}L(z^2)2z                              \\
+               & = -\sqrt{2}M(z) \; (\because \sqrt{z^2}=z \: \text{on} \: E)
+\end{align*}
+
+これより、$E$上$M(z)=Ce^{-\sqrt{2}z}$となる。ただし、$C$は積分定数。
+実軸正の部分から、$u\searrow0$とすれば、$M(u)=L(\sqrt{u}) \to L(0)=1$となる。
+従って、$C=1$で$M(z)=e^{-\sqrt{2}z}$、$D$上で$L(z)=M(\sqrt{z})=e^{-\sqrt{2z}}$となる。
+
+$u>0$の場合、$z=a-iu$として、$a\searrow0$とすれば、
+$\sqrt{z} \to \sqrt{u} \qty(\frac{1}{\sqrt{2}}-\frac{1}{\sqrt{2}}i)$なので、
+\begin{equation*}
+  \phi(u)=L(-iu)=\lim_{a \searrow 0}L(a-iu)=e^{-\sqrt{u}(1-i)}
+\end{equation*}
+となる。極限を取る際に$\overline{D}$上での連続性を用いた。
+
+$u<0$の場合、$z=a-iu$として、$a\searrow0$とすれば、
+$\sqrt{z} \to \sqrt{u} \qty(\frac{1}{\sqrt{2}}+\frac{1}{\sqrt{2}}i)$なので、
+\begin{equation*}
+  \phi(u)=L(-iu)=\lim_{a \searrow 0}L(a-iu)=e^{-\sqrt{-u}(1+i)}
+\end{equation*}
+となる。極限を取る際に$\overline{D}$上での連続性を用いた。
+
+u=0の場合、
+\begin{equation*}
+  \phi(0)=1
+\end{equation*}
+となる。
+
+以上より、まとめて、
+\begin{equation*}
+  \phi(u)=\begin{cases}
+    e^{-\sqrt{u}(1-i)}  & (u>0) \\
+    e^{-\sqrt{-u}(1+i)} & (u<0) \\
+    0                   & (u=0)
+  \end{cases}
+\end{equation*}
+が答えとなる。
+
+以下、$L$の正則性と連続性を見る。
+
+まず正則性を見る。
+$u=a+ib \in D$とする。
+$0<\abs{h}<\frac{a}{2}$とし、$h=p+iq$とおく。
+
+\begin{equation*}
+  \frac{L(u+h)-L(u)}{h}=\int_0^\infty \frac{e^{-(u+h)y}-e^{-uy}}{h} f(y) \dd{y}
+\end{equation*}
+で、被積分関数に関して、
+\begin{align*}
+  \abs{\frac{e^{-(u+h)y}-e^{-uy}}{h}} & = \abs{\frac{1}{h}\int_u^{u+h} -y e^{-ky} \dd{k}}                  \\
+                                      & = \abs{\frac{1}{h}\int_0^1 -y e^{-\qty(u+t(p+iq))y} (p+iq) \dd{t}} \\
+                                      & \leq \frac{1}{\abs{h}}\int_0^1 y e^{-\qty(a+tp)y} \abs{h} \dd{t}   \\
+                                      & \leq \int_0^1 y e^{-\qty(a-\frac{\abs{p}}{2})y} \dd{t}             \\
+                                      & \leq y e^{-\qty(a-\frac{\abs{p}}{2})y}
+\end{align*}
+となるため、$y e^{-\qty(a-\frac{\abs{p}}{2})y} f(y)$は可積分であり、優収束定理が使えて、
+\begin{equation*}
+  \dv{L(u)}{u} =\int_0^{\infty}  {-y e^{-uy}f(y)} \dd{y}
+\end{equation*}
+となる。つまり、$D$上正則となる。
+
+次に連続性を見る。
+$u=ib \in \overline{D}, |h|<1,u+h \in \overline{D}$とし、
+$h=p+iq (p \geq 0)$とおく。
+
+\begin{equation*}
+  L(u+h)=\int_0^{\infty} e^{-(u+h)y}f(y)\dd{y}
+\end{equation*}
+となるが、被積分関数に関して、
+\begin{equation*}
+  \abs{e^{-(u+h)y}f(y)}=e^{-py}f(y) \leq f(y) \; (\because \; y \geq 0)
+\end{equation*}
+なので、優収束定理が使えて、
+\begin{equation*}
+  \lim_{z \to u}L(z)=\int_0^\infty e^{-uy}f(y) \dd{y}
+\end{equation*}
+となる。つまり、$\overline{D}$上連続となる。
+
+\subsection*{(4)}
+
+$\frac{1}{n^2}\sum_{i=1}^n{Y_i}$の特性関数を求める。
+
+\begin{align*}
+  \mathbb{E}\qty[e^{iu\frac{1}{n^2}\sum_{i=1}^n{Y_i}}] & =\mathbb{E}\qty[\prod_{i=1}^{n}e^{iu\frac{1}{n^2}Y_i}]                             \\
+                                                       & =\prod_{i=1}^{n}\mathbb{E}\qty[e^{iu\frac{1}{n^2}Y_i}] \; (\because \text{i.i.d.}) \\
+                                                       & =\mathbb{E}\qty[e^{iu\frac{1}{n^2}Y}]^n                                            \\
+                                                       & =\phi\qty(\frac{u}{n^2})^n                                                         \\
+                                                       & =\phi(u)
+\end{align*}
+となる。
+
+よって、Yに分布収束する($n \to \infty$が関係ない答えである為、本当に正しいのかどうかは不明)。
+
+\section{知識}
+
+確率変数の変数変換の公式\cite{label:1}
+
+単調写像でない場合に注意\cite{label:2}
+
+\begin{align*}
+              & P(x<X<x+\delta x)=P(y<Y<y+\delta y)                              \\
+  \Rightarrow & \int_{x}^{x+\dd{x}}f(x')\dd{x'}= \int_{y}^{y+\dd{y}}g(y')\dd{y'} \\
+  \Rightarrow & f(x)\dd{x}=g(y)\dd{y}                                            \\
+  \Rightarrow & g(y)=f(x)\abs{\dv{x}{y}}
+\end{align*}
+
+\begin{thebibliography}{9}
+  \bibitem{label:1}
+  石川顕一. ``統計数理''. 東京大学工学部システム創成学科Cコース. \\\url{https://ocw.u-tokyo.ac.jp/lecture_files/engin_05/2/notes/ja/ishikawa2.pdf}
+  \bibitem{label:2}
+  ``【確率変数の変換】証明と例題''. ゆっくりキカイガクシュウ. 2020/2/11. \\\url{https://laid-back-scientist.com/change-of-variables}
+\end{thebibliography}
+
+\end{document}

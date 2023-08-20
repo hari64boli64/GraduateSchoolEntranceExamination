@@ -1,0 +1,143 @@
+\documentclass[a4paper, 10pt, dvipdfmx]{jlreq}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage{url}
+
+\Urlmuskip=0mu plus 10mu
+\allowdisplaybreaks[4]
+\frenchspacing
+\definecolor{OliveGreen}{rgb}{0.0,0.6,0.0}
+\definecolor{Orenge}{rgb}{0.89,0.55,0}
+\definecolor{SkyBlue}{rgb}{0.28, 0.28, 0.95}
+\lstset{
+  language={c++},
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  ndkeywordstyle={\small},
+  frame=single,
+  breaklines=true,
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  lineskip=-0.9ex,
+  keywordstyle={\small\bfseries\color{SkyBlue}},  
+  commentstyle={\color{OliveGreen}}, 
+  stringstyle={\small\ttfamily\color{Orenge}}    
+}
+
+\begin{document}
+
+\title{2023年度 大問2}
+\author{hari64boli64 (hari64boli64@gmail.com)}
+\date{\today}
+\maketitle
+
+\section{問題}
+
+\begin{align*}
+  F_i(x)=x_i \qty(v_i+\sum_{j=1}^{n}a_{ij}x_j) \\
+  \dv{x_i(t)}{t}=F_i(x(t))
+\end{align*}
+
+\section{解答}
+
+\subsection*{(1)}
+
+まず、$F_i(x^*)=0$という条件より、
+また、$x^* \in \mathcal{X}_n$より、$x^*_i \neq 0$であることより、
+$v_i=-\sum_{j=1}^{n}{a_{ij}x^*_j}$である。
+
+条件を整理していくと、
+\begin{align*}
+  \dot{L(x')} & =\left.\dv{L(x(t))}{dt}\right|_{t=0}                                                                \\
+              & =\sum_{i=1}^{n}{c_i\qty(-\frac{x_i^*}{x'_i}+1)\left.\dv{x_i}{t}\right|_{t=0}}                       \\
+              & =\sum_{i=1}^{n}{c_i\qty(-\frac{x_i^*}{x'_i}+1)F_i(x')}                                              \\
+              & =\sum_{i=1}^{n}{c_i\qty(-\frac{x_i^*}{x'_i}+1)x'_i\qty(v_i+\sum_{j=1}^{n}a_{ij}x'_j)}               \\
+              & =\sum_{i=1}^{n}{c_i\qty(-x_i^*+x'_i)\qty(v_i+\sum_{j=1}^{n}a_{ij}x'_j)}                             \\
+              & =-\sum_{i=1}^{n}{c_ix_i^*v_i}-\sum_{i=1}^{n}{c_ix_i^*\qty(\sum_{j=1}^{n}a_{ij}x'_j)}
+  +\sum_{i=1}^{n}{c_ix'_iv_i}+\sum_{i=1}^{n}{c_ix'_i\qty(\sum_{j=1}^{n}a_{ij}x'_j)}                                 \\
+              & =\sum_{i=1}^{n}\sum_{j=1}^{n}{c_ix_i^*a_{ij}x^*_j}-\sum_{i=1}^{n}\sum_{j=1}^{n}{c_ix_i^*a_{ij}x'_j}
+  -\sum_{i=1}^{n}\sum_{j=1}^{n}{c_ix'_ia_{ij}x^*_j}+\sum_{i=1}^{n}\sum_{j=1}^{n}{c_ix'_ia_{ij}x'_j}                 \\
+              & ={x^*}^TCAx^*-{x^*}^TCAx'-{x'}^TCAx^*+{x'}^TCAx'                                                    \\
+              & =(x^*-x')^TCA(x^*-x')
+\end{align*}
+となる。
+
+よって、
+\begin{align*}
+                  & (\forall x'\in \mathcal{X}_n\setminus \{x^*\}) \dot{L(x')} < 0                                                      \\
+  \Leftrightarrow & (\forall x'\in \mathcal{X}_n\setminus \{x^*\})(x^*-x')^TCA(x^*-x')<0                                                \\
+  \Leftrightarrow & (\forall x'\in \mathcal{X}_n\setminus \{x^*\}) \qty((x^*-x')^TCA(x^*-x')< 0) \wedge \qty((x^*-x')^TA^TC(x^*-x')< 0) \\
+  \Leftrightarrow & (\forall y \in \mathbb{R}^n) y^T(CA+A^TC)y< 0                                                                       \\
+  \Leftrightarrow & CA+A^TC \prec 0
+\end{align*}
+となる。
+なお、$x^*-x'$から$y$への変換には注意が必要である。
+全ての$y\in \mathbb{R}^n$に対して、
+$x^*-x'=y$を満たす$x'\in \mathcal{X}_n\setminus \{x^*\}$
+が存在するとは限らない。
+ここでは長さに関する定数倍の変換が挟まっている。
+
+\subsection*{(2)}
+
+まず、$\nabla H_w(z)= \qty(w_1z_1,\dots,w_nz_n)^T$である。
+
+ここで、
+\begin{align*}
+  \dv{z_i(t)}{t} & =\dv{x_i(t)}{t}                                               \\
+                 & =F_i(x(t))                                                    \\
+                 & =x_i(t)\qty(v_i+\sum_{j=1}^{n}a_{ij}x_j(t))                   \\
+                 & =(x_i(t)-x^*_i+x^*_i)\qty(\sum_{j=1}^{n}a_{ij}(x_j(t)-x^*_j)) \\
+                 & =(z_i(t)+x^*_i)\qty(\sum_{j=1}^{n}a_{ij}z_j(t))
+\end{align*}
+となるので、
+\begin{align*}
+  \dv{z(t)}{t} & =(Z+X^*) A z(t)                    \\
+               & =(Z+X^*) A W^{-1} W z(t)           \\
+               & =(Z+X^*) A W^{-1} \nabla H_w(z(t))
+\end{align*}
+となる。
+
+\subsection*{(3)}
+
+条件をより平易な表現で言い表すと、$\lim_{z(t) \to 0}$において、
+$\dv{H_w(z(t))}{t}<0$を満たすような$w$を、$c$を用いて表現せよ、
+ということになる。
+
+このことを念頭に置いて式変形していくと、
+\begin{align*}
+  \dv{H_w(z(t))}{t} & =\sum_{i=1}^{n}{w_iz_i(t)\dv{z_i(t)}{t}}                \\
+                    & =\nabla H_w(z(t))^TG(z(t))\nabla H_w(z(t))              \\
+                    & =\nabla H_w(z(t))^T\qty((Z+X^*)AW^{-1})\nabla H_w(z(t))
+\end{align*}
+となり、
+\begin{align*}
+                  & \dv{H_w(z(t))}{t}<0                                                    \\
+  \Leftrightarrow & \nabla H_w(z(t))^T\qty((Z+X^*)AW^{-1})\nabla H_w(z(t))<0               \\
+  \Leftrightarrow & \nabla H_w(z(t))^T\qty((Z+X^*)C^{-1}(CA+A^TC)W^{-1})\nabla H_w(z(t))<0
+\end{align*}
+となる。
+なお、最後の変形で、$W,X^*,Z$が対角行列であることを用いた。
+
+以上より、$(Z+X^*)C^{-1}(CA+A^TC)W^{-1}$が$CA+A^TC$に関する
+二次形式の形で記述出来る時、これはその負定値性より負になる。
+
+これは、
+\begin{align*}
+                  & {W^{-1}}^T=(Z+X^*)C^{-1} \\
+  \Leftrightarrow & W=(Z+X^*)^{-1}C
+\end{align*}
+を意味し、$Z \to 0$を考慮すると、$W=X^*C$を満たすような$w$であれば、
+題意を満たすことが分かる。
+
+\end{document}
