@@ -8,7 +8,7 @@
 \usepackage[dvipdfmx]{graphicx}
 \usepackage[dvipdfmx]{color}
 \usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
-\usepackage{listings, jlisting}
+\usepackage{listings}
 \usepackage{tikz}
 \usepackage{physics}
 \usepackage{url}
@@ -116,34 +116,7 @@ $||x||_2=1$を満たす全ての$x$に対して、$B,C$の正定値性に注意�
 
 \subsection*{(1)について}
 
-\begin{align*}
-                  & B^2         =C^2    \\
-  \Leftrightarrow & B^2-C^2     =O      \\
-  \Leftrightarrow & (B-C)(B+C)  = CB-BC \\
-\end{align*}
-
-となり、また、$B+C$は対角成分が正なので、$BC=CB \Rightarrow B=C$が言える。
-
-これは、$B$と$C$の可換性、つまり、同時対角化可能性と同値であり、その方針でも示せるはずである。
-
-\begin{itembox}[l]{同時対角化可能⇔交換可能の意味と証明\cite{site:1}}
-  $A$と$B$が同時対角化可能なとき，ある正則行列$P$が存在して$P^{-1}AP$と$P^{-1}BP$がともに対角行列となる。
-
-  対角行列どうしは交換可能なので，
-  \begin{align*}
-    (P^{-1}AP)(P^{-1}BP)=(P^{-1}BP)(P^{-1}AP)
-  \end{align*}
-
-  整理する:
-  \begin{align*}
-     & P^{-1}ABP=P^{-1}BAP \\
-     & AB=BA
-  \end{align*}
-\end{itembox}
-
-しかし、自分には分からなかった。(もしこれを誰かが読んでいるのであれば教えて欲しい……)
-
-計数の人のブログらしきものもあった。\cite{site:2}
+計数の人のブログらしきものがあった。\cite{site:2}
 
 \subsection*{(2)}
 
