@@ -7,7 +7,7 @@
 \usepackage[dvipdfmx]{graphicx}
 \usepackage[dvipdfmx]{color}
 \usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
-\usepackage{listings, jlisting}
+\usepackage{listings}
 \usepackage{tikz}
 \usepackage{physics}
 \usepackage{url}
@@ -94,7 +94,7 @@ $k<M$の場合を考える。この時、状態遷移図は図\ref{img:automaton
 
 \begin{figure}[htbp]
     \begin{center}
-        \includegraphics[height=80mm]{automaton.png}
+        \includegraphics[height=70mm]{automaton.png}
         \caption{automaton}
         \label{img:automaton}
     \end{center}
@@ -163,32 +163,29 @@ $k<M$の場合を考える。この時、状態遷移図は図\ref{img:automaton
 整理して、
 
 \begin{align*}
-    A_0(t)     & =\frac{(qt)^M}{1-(1-q)t\qty(\frac{1-(qt)^M}{1-qt})}                                                                      \\
-    A_{M-i}(t) & =(qt)^i+(1-q)t\qty(\frac{1-(qt)^i}{1-qt})\frac{(qt)^M}{1-(1-q)t\qty(\frac{1-(qt)^M}{1-qt})} \quad (0 < i \leq M)         \\
-    A_{k}(t)   & =(qt)^{M-k}+(1-q)t\qty(\frac{1-(qt)^{M-k}}{1-qt})\frac{(qt)^M}{1-(1-q)t\qty(\frac{1-(qt)^M}{1-qt})} \quad (0 \leq k < M) \\
+    A_0(t)     & =\frac{(qt)^M}{1-(1-q)t\qty(\frac{1-(qt)^M}{1-qt})} = \frac{(1-qt)(qt)^M}{1-t+t(1-q)(qt)^M}         \\
+    A_{M-i}(t) & =(qt)^i+(1-q)t\qty(\frac{1-(qt)^i}{1-qt})\frac{(1-qt)(qt)^M}{1-t+t(1-q)(qt)^M} \quad (0 < i \leq M) \\
+               & =   (qt)^i \frac{1-t+t(1-q)(qt)^{M-i}}{1-t+t(1-q)(qt)^M} \quad (0 < i \leq M)                       \\
+    A_{k}(t)   & =(qt)^{M-k} \frac{1-t+t(1-q)(qt)^{k}}{1-t+t(1-q)(qt)^M} \quad (0 \leq k < M)                        \\
 \end{align*}
 
 となる。
 
-(補足: 答えは合っている気がするけれど、整理しきれていない可能性は高い。式が汚すぎる。)
-
 \subsection*{(4)}
 
 (3)の結果より、
-
-\begin{align*}
-    A_0(t) & =\frac{(qt)^M}{1-(1-q)t\qty(\frac{1-(qt)^M}{1-qt})} \\
-           & =\frac{(qt)^M(1-qt)}{(1-qt)-(1-q)t(1-(qt)^M)}       \\
-\end{align*}
-
+\begin{equation*}
+    A_0(t) =\frac{(1-qt)(qt)^M}{1-t+t(1-q)(qt)^M}
+\end{equation*}
+である。
 
 (1)と同様の考え方から、答えは$\qty(\dv{t}A_0(t))_{t=1}$である。
 
 よって、これを微分して、代入整理すると、
 
-\begin{align*}
+\begin{equation*}
     \frac{1-q^M}{(1-q)q^M}
-\end{align*}
+\end{equation*}
 
 となる。
 
