@@ -86,7 +86,9 @@ $\frac{1}{2y}=uz$という変数変換が本質的。
 
 \subsection*{(3)}
 
-(2)の式に当てはめて$L(-iu)=e^{-\sqrt{2u}\sqrt{-i}}$としたい所だが、これは厳密な解答ではない。
+(2)の式に当てはめて$L(-iu)=e^{-\sqrt{2u}\sqrt{-i}}$
+としたい所だが、これは厳密な解答ではない。
+$\sqrt{-i}$自体が多価関数。
 
 以下Slackにあがっていた解答の書き起こし。
 なお、この解答の作成者は数学科の複素関数論を履修されていた方です。
@@ -171,10 +173,11 @@ $0<\abs{h}<\frac{a}{2}$とし、$h=p+iq$とおく。
   \abs{\frac{e^{-(u+h)y}-e^{-uy}}{h}} & = \abs{\frac{1}{h}\int_u^{u+h} -y e^{-ky} \dd{k}}                  \\
                                       & = \abs{\frac{1}{h}\int_0^1 -y e^{-\qty(u+t(p+iq))y} (p+iq) \dd{t}} \\
                                       & \leq \frac{1}{\abs{h}}\int_0^1 y e^{-\qty(a+tp)y} \abs{h} \dd{t}   \\
-                                      & \leq \int_0^1 y e^{-\qty(a-\frac{\abs{p}}{2})y} \dd{t}             \\
-                                      & \leq y e^{-\qty(a-\frac{\abs{p}}{2})y}
+                                      & \leq \int_0^1 y e^{-\frac{a}{2}y} \dd{t}                           \\
+                                      & \leq e^{-\frac{a}{2}y}                                             \\
+                                      & <C \; (h \text{によらず有界})
 \end{align*}
-となるため、$y e^{-\qty(a-\frac{\abs{p}}{2})y} f(y)$は可積分であり、優収束定理が使えて、
+となるため、$C f(y)$は可積分であるから優収束定理が使えて、
 \begin{equation*}
   \dv{L(u)}{u} =\int_0^{\infty}  {-y e^{-uy}f(y)} \dd{y}
 \end{equation*}
