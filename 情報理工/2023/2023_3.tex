@@ -1,0 +1,127 @@
+\documentclass[a4paper, 10pt, dvipdfmx]{jlreq}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage[dvipdfmx, colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage{url}
+
+\Urlmuskip=0mu plus 10mu
+\allowdisplaybreaks[4]
+\frenchspacing
+\definecolor{OliveGreen}{rgb}{0.0,0.6,0.0}
+\definecolor{Orenge}{rgb}{0.89,0.55,0}
+\definecolor{SkyBlue}{rgb}{0.28, 0.28, 0.95}
+\lstset{
+  language={c++},
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  ndkeywordstyle={\small},
+  frame=single,
+  breaklines=true,
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  lineskip=-0.9ex,
+  keywordstyle={\small\bfseries\color{SkyBlue}},  
+  commentstyle={\color{OliveGreen}}, 
+  stringstyle={\small\ttfamily\color{Orenge}}
+}
+
+\begin{document}
+
+\title{2023年度 大問3}
+\author{hari64boli64 (hari64boli64@gmail.com)}
+\date{\today}
+\maketitle
+
+\section{問題}
+
+\begin{equation*}
+  I(f)=\int_0^{2\pi} f(e^{i\theta}) \dd{\theta}, \quad I_N(f)=\frac{2\pi}{N} \sum_{k=1}^N f(e^{\frac{2\pi i k}{N}})
+\end{equation*}
+
+\section{解答}
+
+\subsection*{(1)}
+
+$e^{i\theta}=z$とおくと、$\dv{z}{\theta}=ie^{i\theta}=iz$であるので、
+
+\begin{align*}
+  I(f) & =\int_0^{2\pi} f(e^{i\theta}) \dd{\theta}  \\
+       & =\int_{\Gamma(1)} f(z) \frac{1}{iz} \dd{z} \\
+       & =\oint_{\Gamma(1)} \frac{-i}{z}f(z) \dd{z}
+\end{align*}
+
+\subsection*{(2)}
+
+極は、$z^N-1=0$より、$z=\zeta_N^k \; (\forall k \in [1,N])$となる。ただし、$\zeta_N=e^{\frac{2\pi i}{N}}$である。
+
+よって、留数はロピタルの定理を用いると、
+\begin{align*}
+  \underset{z = \zeta_N^k}{\mathrm{Res}} g_N[f](z) & = \lim_{z \to \zeta_N^k} (z-\zeta_N^k)\frac{-iz^{N-1}}{z^N-1}f(z) \\
+                                                   & = \lim_{z \to \zeta_N^k} \frac{-iz^{N-1}}{Nz^{N-1}}f(z)           \\
+                                                   & = \frac{-i}{N}f(\zeta_N^k)
+\end{align*}
+となる。
+
+\subsection*{(3)}
+
+(2)の結果と留数定理より、
+\begin{align*}
+  \oint_{\Gamma(r')}g_N[f](z) \dd{z} & = \oint_{\Gamma(r')}\frac{-iz^{N-1}}{z^N-1}f(z)\dd{z}                    \\
+                                     & = 2\pi i \sum_{k=1}^{N} \underset{z = \zeta_N^k}{\mathrm{Res}} g_N[f](z) \\
+                                     & = \frac{2\pi}{N} \sum_{k=1}^{N} f(\zeta_N^k)
+\end{align*}
+となる。ただし、$1<r'<r$とする。
+
+なお、ここで$r'$を$r$としなかったのは、$f(z)$が$D_r=\{ z\in\mathbb{C} \; | \; |z| < r \}$でのみ定義されている関数であり、
+$\Gamma(r)$で未定義であるからである。
+
+これを用いて、与式を評価すると、
+\begin{align*}
+  \abs{I(f)-I_N(f)} & =\abs{\oint_{\Gamma(1)} \frac{-i}{z}f(z) \dd{z} - \frac{2\pi}{N} \sum_{k=1}^{N} f(\zeta_N^k)} \\
+                    & =\abs{\oint_{\Gamma(r')} \frac{-i}{z}f(z) \dd{z} - \oint_{\Gamma(r')} g_N[f](z) \dd{z}}       \\
+                    & =\abs{\oint_{\Gamma(r')} \qty(\frac{-i}{z} - \frac{-iz^{N-1}}{z^N-1})f(z) \dd{z}}             \\
+                    & \leq \norm{f} \oint_{\Gamma(r')} \abs{\frac{-i}{z} - \frac{-iz^{N-1}}{z^N-1}} \dd{z}          \\
+                    & = \norm{f} \oint_{\Gamma(r')} \abs{\frac{1}{z(z^N-1)}} \dd{z}                                 \\
+                    & \leq \norm{f} \frac{2\pi r'}{r'({r'}^N-1)}                                                    \\
+                    & =  \frac{2\pi\norm{f}}{({r'}^N-1)}
+\end{align*}
+となる。
+
+これが、任意の$1<r'<r$に対して成立するので、$r' \nearrow r$の極限をとると、
+\begin{equation*}
+  \abs{I(f)-I_N(f)} \leq \frac{2\pi\norm{f}}{r^{N}-1}
+\end{equation*}
+となる。
+
+\subsection*{(4)}
+
+まず、与式の上界が$2\pi$であることは、(3)より明らか。
+
+与式を下から評価して、それが$2\pi$に収束することを示す。
+ここで、$f(z)=z^N$とすると、
+\begin{align*}
+  I(f)   & =\int_0^{2\pi} e^{iN\theta} \dd{\theta} = \frac{1}{iN} \qty[e^{iN\theta}]_0^{2\pi} = 0\\
+  I_N(f) & =\frac{2\pi}{N} \sum_{k=1}^N e^{2\pi i k} = 2\pi
+\end{align*}
+となる。
+
+よって、
+\begin{equation*}
+  \limsup_{N \to \infty} \qty(r^N \sup_f \frac{\abs{I(f)-I_N(f)}}{\norm{f}}) \geq  \abs{0-2\pi} = 2\pi
+\end{equation*}
+となる。
+
+以上より、答えは$2\pi$である。
+
+
+\end{document}
