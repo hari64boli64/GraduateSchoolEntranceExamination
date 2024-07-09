@@ -1,17 +1,27 @@
 # GraduateSchoolEntranceExamination
 
-## 概要
+## 概要 About
 
 東京大学大学院情報理工学系研究科の入試問題の過去問、および、共通数学の過去問の解答をまとめたものです。
 
-[HP](https://www.i.u-tokyo.ac.jp/edu/course/mi/admission.shtml)も参照して下さい。
+This repository is a collection of answers for past entrance examination questions for the Graduate School of Information Science and Technology, the University of Tokyo.
 
-## 掲載問題
+[数理情報学専攻のHP](https://www.i.u-tokyo.ac.jp/edu/course/mi/admission.shtml)も参照して下さい。
+また、[私が執筆したnote](https://note.com/hari64boli64/n/n9b8c923dfbd7)も必要であればご参照下さい。
+
+Please also refer to the [official website](https://www.i.u-tokyo.ac.jp/edu/course/mi/admission.shtml).
+If necessary, please refer to the [note I wrote](https://note.com/hari64boli64/n/n9b8c923dfbd7).
+
+
+## 掲載問題 Problems
 
 以下の問題しか取り扱っていません。また、扱っていても不完全であることが多いです。
 多くの問題はAPの過去フォルダなどに解答があることもあります。
 そちらを主に参照なさってください。
 なお、2021年度、2022年度はコロナの影響により問題自体がありません。
+
+We only handle the following problems. Also, some of them are incomplete.
+Please note that the problems of 2021 and 2022 do not exist due to COVID-19.
 
 |kind|year|name|
 |:--:|:--:|:--:|
@@ -50,16 +60,22 @@
 |情報理工|2023|4|
 |情報理工|2023|5|
 
-## 誤りがあった場合
+## 誤りがあった場合 If there is an error
 
 Issueを立てていただければ、対応します。
 
-## 著作権について
+If you find any errors, please create an issue.
 
-### 問題の著作権
+## 著作権について Copyright
+
+### 問題の著作権 Copyright of the problems
 
 問題の概略しか記載していないので、侵害していないと思いますが、もし侵害していると思われる場合は、ご連絡ください。
 
-### このリポジトリの著作権
+To be determined.
+
+### このリポジトリの著作権 Copyright of this repository
 
 このリポジトリの著作権は、すべて放棄します。自由に使ってください。
+
+I waive all rights to this repository. Feel free to use it.
