@@ -70,9 +70,9 @@ If you find any errors, please create an issue.
 
 ### 問題の著作権 Copyright of the problems
 
-問題の概略しか記載していないので、侵害していないと思いますが、もし侵害していると思われる場合は、ご連絡ください。
+問題の著作権は東京大学に帰属します。その為、問題自体はこのレポジトリに含めていません。
 
-To be determined.
+The copyright of the problems belongs to the University of Tokyo. Therefore, the problems themselves are not included in this repository.
 
 ### このリポジトリの著作権 Copyright of this repository
 
